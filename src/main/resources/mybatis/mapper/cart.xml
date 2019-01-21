@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cart">
+	
+	<insert id="insert" parameterType="Cart">
+		insert into cart values(seq_cart_id.nextval,#{model},#{user_id},#{opt},1)
+	</insert>
+
+	<select id="selectOne" parameterType="Cart" resultType="Cart"> 
+		select * from cart where model=#{model} and user_id = #{user_id} 
+	</select>
+	<select id="selectList" parameterType="String" resultMap ="productMap">
+		select * from cart where user_id = #{value}
+	</select>
+	
+	<resultMap type="Cart" id="productMap">
+		<association property="product" javaType="Product" 
+						   column="model" select="product.selectOneByModel"/>
+	</resultMap>
+	
+	<update id="update" parameterType="Map">
+		update cart set count = #{count} where id = #{id}
+	</update>
+	
+	<select id="selectOneById" parameterType="int" resultMap ="productMap">
+		select * from cart where id = #{value}
+	</select>
+</mapper>
+

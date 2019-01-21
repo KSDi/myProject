@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/"/>
+			<mvc:mapping path="/product/**"/>
+			<mvc:mapping path="/user/basket"/>
+			<ref bean="categoryListInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<context:component-scan base-package="com.don.controller,com.don.interceptor" />
+	
+	<bean name="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		p:defaultEncoding="utf-8" p:maxUploadSize="10485760" />
+	
+	<context:annotation-config/>
+
+	<mvc:resources mapping="/css/**"
+		location="/WEB-INF/public/css/" />
+	<mvc:resources mapping="/image/**"
+		location="/WEB-INF/public/image/" />
+	<mvc:resources mapping="/js/**"
+		location="/WEB-INF/public/js/" />
+	<mvc:resources mapping="/upload/**" location="/upload/" />
+
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver"/>
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/WEB-INF/views/" p:suffix=".jsp" />
+
+</beans>
+
+
+
+

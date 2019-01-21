@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+	<select id="selectListByCategory" resultType="Product" parameterType="Map">
+		select * from product
+		<where>
+			<if test="category != null"> 
+				category = #{category}
+			</if>
+		</where>
+			<if test="order == 'price'">
+				order by price * ( 1 - discount)
+				<if test="base == 'asc'">
+					asc
+				</if>
+				<if test="base == 'desc'">
+					desc
+				</if>
+			</if>
+		    <!-- <if test="order == 'popular'">
+				cart_count
+				<if test="base == 'asc'">
+					asc
+				</if> 
+				<if test="base == 'desc'">
+					desc
+				</if>
+			</if>  -->
+	</select>
+	<select id="selectOneByModel" parameterType="String" resultType="Product">
+		select * from product where model = #{value}
+	</select>
+	<select id="selectCategoryList" resultType="String">
+		select category from category
+	</select>
+</mapper>
+
