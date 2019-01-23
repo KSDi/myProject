@@ -23,6 +23,15 @@ public class UserDao {
 	public void setAuthority(String id) {
 		session.insert("user.insertAuthority",id);
 	}
+
+	public User selectOneByEmail(String email) {
+		return session.selectOne("user.selectOneByEmail",email);
+	}
+
+	public void updateEmail(User user) {
+		System.out.println(user);
+		session.update("user.updateEmail",user);
+	}
 	
 	
 }

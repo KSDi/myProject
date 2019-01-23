@@ -20,6 +20,7 @@ public class User implements UserDetails{
 	@Pattern(regexp="\\d{11}",message="전화번호를 입력해주세요")
 	private String phone;
 	private List<Authority> authorities;
+	private String email;
 	
 	public String getId() {
 		return id;
@@ -78,16 +79,25 @@ public class User implements UserDetails{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone + ", authorities="
-				+ authorities + "]";
+		return "User [id=" + id + ", password=" + password + ", CheckPassword=" + CheckPassword + ", name=" + name
+				+ ", phone=" + phone + ", authorities=" + authorities + ", email=" + email + "]";
 	}
+	
 	public String getCheckPassword() {
 		return CheckPassword;
 	}
 	public void setCheckPassword(String checkPassword) {
 		CheckPassword = checkPassword;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

@@ -36,12 +36,12 @@
 	<jsp:include page="../header.jsp" />
 	<div class="content">
 		<div class="container-fluid">
-			<div class="row">
+			<div class="row" >
 				<div class="col-sm-2">
 					<jsp:include page="../left_menu.jsp" />
 				</div>
 				<div class="col-sm-8 text-center">
-					<div class="row">
+					<div class="row" >
 						<div class="col-sm-6">
 							<img style="width:100%;"src="/image/${product.category }/${product.image}" alt="" />
 						</div>
@@ -90,6 +90,7 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="../footer.jsp" />
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script>

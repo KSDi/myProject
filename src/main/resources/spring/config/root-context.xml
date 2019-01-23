@@ -25,6 +25,18 @@
 					value="classpath:mybatis/config/mybatis-context.xml"/>
 	</bean>
 	
+	<bean id="JavaMailSenderImpl" class="org.springframework.mail.javamail.JavaMailSenderImpl" 
+			  p:host="smtp.gmail.com" p:port="587" p:username="rlatkdehs9@gmail.com" p:password="rla@tkd@ehs99" >
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+	
 	<context:property-placeholder 
 		  location="classpath:mybatis/config/db.properties"/>
 	

@@ -11,13 +11,15 @@
 	<security:http auto-config="true" use-expressions="true">
 		<!-- auto-config : http기본인증을 사용할 것인가(ID,PASSWORD) -->
 		<!-- use-expressions : spel 사용 여부 -->
-		<security:intercept-url pattern="/" access="permitAll"/>
+		<security:intercept-url pattern="/**" access="permitAll"/>
 		<security:intercept-url pattern="/user/signin" access="permitAll"/>
 		<security:intercept-url pattern="/user/dupCheck" access="permitAll"/>
+		<security:intercept-url pattern="/user/basket" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/user/purchase" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/cart/insert" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/board/**" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+		<!-- <security:intercept-url pattern="/user/purchase" access="isAuthenticated()" requires-channel="https"/> -->
 		<security:form-login login-page="/user/signin" login-processing-url="/user/signin"
 									   username-parameter="id" password-parameter="password" 
 									   authentication-failure-url="/user/signin?fail" default-target-url="/" always-use-default-target="false"/>

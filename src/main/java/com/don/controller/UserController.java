@@ -1,7 +1,10 @@
 package com.don.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,8 @@ public class UserController {
 	@Autowired
 	private CartService cartService;
 	
+	@Autowired
+	private HttpSession session;
 	
 	@RequestMapping(value= {"/user/signup"},method =RequestMethod.GET)
 	public String signup(Model model) {
@@ -86,6 +91,7 @@ public class UserController {
 		List<Cart> cartList = cartService.selectList(user.getId());
 		model.addAttribute("cartList",cartList);
 		model.addAttribute("total",cartService.getTotal(cartList));
+		System.out.println(user.getEmail());
 		return "/user/basket";
 	}
 	
@@ -96,5 +102,46 @@ public class UserController {
 		model.addAttribute("total",cartService.getTotal(cartList));
 		model.addAttribute("user",user);
 		return "/user/purchase";
+	}
+	
+	
+	@RequestMapping(value = { "/user/checkEmail" }, method = RequestMethod.POST)
+	@ResponseBody
+	public String checkEmail(@RequestParam String email) {
+		if(!userService.checkValidEmail(email)) {
+			return "unvalidEmail";
+		}
+		if(userService.dupCheckEmail(email) ) {
+			return "duplicatedEmail";
+		}
+		String emailCode ="";
+		try {
+			emailCode = userService.sendCertifyEmail(email);
+		} catch (Exception e) {
+			return "error";
+		}
+		
+		session.setAttribute("email", email);
+		session.setAttribute("emailCode", emailCode);
+		return "success";
+	}
+	
+	@RequestMapping(value = { "/user/checkEmailCode" }, method = RequestMethod.POST)
+	@ResponseBody
+	public String checkEmailCode(@AuthenticationPrincipal User user,@RequestParam String email, @RequestParam String emailCode) {
+		
+		if(!((String)session.getAttribute("email")).equals(email)) {
+			return "notSameEmail";
+		}else if(!((String)session.getAttribute("emailCode")).equals(emailCode)) {
+			return "notSameEmailCode";
+		}
+		
+		user.setEmail((String)session.getAttribute("email"));
+		System.out.println(user);
+		userService.updateEmail(user);
+		session.invalidate();
+		
+		return "success";
+		
 	}
 }

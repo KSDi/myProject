@@ -136,10 +136,10 @@
 									<div class="aa-product-inner">
 										<!-- start prduct navigation -->
 										<ul class="nav nav-tabs aa-products-tab">
-											<li class="active"><a href="#top" data-toggle="tab">Top</a></li>
-											<li><a href="#outer" data-toggle="tab">Outer</a></li>
-											<li><a href="#pants" data-toggle="tab">Pants</a></li>
-											<li><a href="#acc" data-toggle="tab">Acc</a></li>
+											<li class="active btn btn-default"><a href="#top" data-toggle="tab">Top</a></li>
+											<li class="btn btn-default"><a href="#outer" data-toggle="tab">Outer</a></li>
+											<li class="btn btn-default"><a href="#pants" data-toggle="tab">Pants</a></li>
+											<li class="btn btn-default"><a href="#acc" data-toggle="tab">Acc</a></li>
 										</ul>
 										<!-- Tab panes -->
 										<div class="tab-content">
@@ -249,6 +249,7 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="footer.jsp" />
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

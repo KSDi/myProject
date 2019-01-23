@@ -16,6 +16,7 @@
 	</select>
 	
 	<resultMap type="Cart" id="productMap">
+		<result property="model" column="model"/>
 		<association property="product" javaType="Product" 
 						   column="model" select="product.selectOneByModel"/>
 	</resultMap>

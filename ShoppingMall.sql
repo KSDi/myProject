@@ -16,5 +16,9 @@ create table authority(
     users_id varchar2(20) references users(id),
     role varchar2(15) check(role like '%ROLE\_%' escape '\')
 );
-
+alter table users add (email varchar2(30));
 desc authority;
+
+select * from product;
+
+update users set email = null where id = 'ksd39487';

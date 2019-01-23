@@ -25,5 +25,15 @@
 	<insert id="insertAuthority" parameterType="String">
 		insert into authority values(seq_authority_id.nextval,#{value},'ROLE_BEGINNER')
 	</insert>
+	
+	<select id="selectOneByEmail" parameterType="String" resultType="User">
+		select * from users where email = #{value}
+	</select>
+	
+	<update id="updateEmail" parameterType="User" >
+		update users set email = #{email} where id = #{id}
+	</update>
+	
 </mapper>
+
 
