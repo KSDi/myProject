@@ -91,7 +91,7 @@
 												</p>
 											</td>
 											<td>
-												<p><a href=""><i class="glyphicon glyphicon-remove"></i></a></p>
+												<p><a href="/cart/delete?id=${cart.id }"><i class="glyphicon glyphicon-remove"></i></a></p>
 											</td>
 										</tr>
 									</c:forEach>
@@ -100,7 +100,7 @@
 									<tr>
 										<td colspan="6">
 										<div style="float:right;">
-											<span>상품가격</span> 
+											<span style="font-weight:600;font-size:15px;">상품가격</span> 
 											<span id="total1"><fmt:formatNumber type="number" value="${total }" />원</span>
 											<span><i class="glyphicon glyphicon-plus-sign"></i></span>
 											<span>배송비</span>
@@ -157,8 +157,6 @@
 				type:"GET",
 				data:{id:id , count:count},
 				success:function(data){
-					console.log(typeof data.price);
-					console.log(typeof data.total);
 					$('#total_'+id).html(format(data.price)+"원");
 					$('#total1').html(format(data.total)+"원");
 					$('#total2').html(format(data.total)+"원");

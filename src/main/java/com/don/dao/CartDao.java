@@ -33,5 +33,10 @@ public class CartDao {
 	public Cart selectOne(int id) {
 		return session.selectOne("cart.selectOneById",id);
 	}
+
+	public void delete(int id) {
+		session.delete("cart.delete",id);
+		
+	}
 	
 }

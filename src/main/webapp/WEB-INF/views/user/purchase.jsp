@@ -61,7 +61,7 @@
 		margin-bottom:10px;
 	}
 	.table-first{
-		width:33.3%;
+		width:15%;
 	}
 	.table-second{
 		width:66.6%;
@@ -109,6 +109,11 @@
 		height: 34px;
     	line-height: 34px;
 	}
+	.pur_sec{
+		width:90%;
+		margin : 0 auto;
+		
+	}
 </style>
 </head>
 <body>
@@ -120,7 +125,7 @@
 			<div class="ordTitle">
 				<h1 style="font-weight:700;">결제하기</h1>
 			</div>
-			<div class="customer">
+			<div class="customer pur_sec">
 				<h3>구매자 정보</h3>
 				<div class="col-sm-10 col-sm-offset-1"></div>
 				<table class="table">
@@ -128,6 +133,8 @@
 						<th class="table-first">이름</th>
 						<td class="table-second">
 							<p class="pad-l">
+							
+							
 								${user.name }						
 							</p>
 						</td>
@@ -171,7 +178,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class="customer">
+			<div class="customer_get pur_sec">
 				<h3>받는사람 정보</h3>
 				<table class="table">
 					<tr class="table-top">
@@ -214,7 +221,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class="product">
+			<div class="product pur_sec">
 				<h3>배송될 물건 ( ${fn:length(cartList) }개 )</h3>
 				<div class="panel panel-default">
 					<div class="panel-heading" style="font-size:20px; color: #4cd137; ">
@@ -233,7 +240,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="pay-price">
+			<div class="pay-price pur_sec">
 				<h3>결제 정보</h3>
 				<div class="col-sm-10 col-sm-offset-1"></div>
 				<table class="table">
@@ -348,7 +355,7 @@
 	    	}
 	    	
 	    	var cost = parseInt($("#cost").val());
-	    	var name = ${user.id};
+	    	var name = "${user.id}";
 	    	var phone = $("#phone").val();
 	    	var addr = $("#roadAddress").val()+" "+$("#extraAddress").val()+" "+$("#detailAddress").val();
 	    	var email = $("#email").val();
@@ -364,7 +371,7 @@
 	    	    	buyer_email : email
 	    	   }, function(rsp) {
 	    		    if ( rsp.success ) {
-	    		    			$.ajax({
+	    		    		/* 	$.ajax({
 	    		    				url:"/order/insert",
 	    		    				type:"post",
 	    		    				data : {
@@ -376,7 +383,7 @@
 	    		    				success: function(data){
 	    		    					
 	    		    				}
-	    		    			});
+	    		    			}); */
 	    		    		} else {
 	    		    			//[3] 아직 제대로 결제가 되지 않았습니다.
 	    		    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
