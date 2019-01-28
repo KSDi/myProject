@@ -19,6 +19,20 @@ create table authority(
 alter table users add (email varchar2(30));
 desc authority;
 
-select * from product;
-
-update users set email = null where id = 'ksd39487';
+create table orders (
+    u_id varchar2(25) primary key,
+    buyer_id varchar2(10) references users(id),
+    regdate date not null
+);
+select * from orders;
+alter table orders add (addr varchar2(150));
+alter table orders add (cost number);
+create table order_products(
+    id number primary key,
+    order_id references orders(u_id),
+    product_id references product(model)
+);
+select * from order_products;
+alter table order_products modify (product_opt varchar2(30));
+alter table order_products add (count number);
+create sequence seq_order_products_id;
