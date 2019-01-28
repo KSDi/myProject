@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+	<insert id="insertOrder" parameterType="Order">
+		insert into orders values(#{u_id},#{buyer_id},sysdate,#{addr},#{cost},#{status})
+	</insert>
+	<insert id="insertOrderProduct" parameterType="Map">
+		insert into order_products values(seq_order_products_id.nextval,#{u_id},#{product_id},#{product_opt},#{count})
+	</insert>
+	<select id="selectList" parameterType="String" resultType="Order">
+		select * from orders where buyer_id = #{value}
+	</select>
+</mapper>
+
+

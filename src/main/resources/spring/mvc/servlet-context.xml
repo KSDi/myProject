@@ -13,6 +13,7 @@
 			<mvc:mapping path="/"/>
 			<mvc:mapping path="/product/**"/>
 			<mvc:mapping path="/user/basket"/>
+			<mvc:mapping path="/user/mypage"/>
 			<ref bean="categoryListInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

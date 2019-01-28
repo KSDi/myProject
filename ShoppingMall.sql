@@ -32,7 +32,16 @@ create table order_products(
     order_id references orders(u_id),
     product_id references product(model)
 );
+update orders set status='배송준비';
+select * from orders;
+desc orders;
+alter table orders add (status varchar2(10) check (status in('배송준비','배송중','배송완료')));
+alter table orders modify (status varchar2(12));
+desc order_products;
+select * from orders;
 select * from order_products;
+alter table orders modify (regdate systimestamp);
 alter table order_products modify (product_opt varchar2(30));
 alter table order_products add (count number);
 create sequence seq_order_products_id;
+select currval('seq_order_products_id');

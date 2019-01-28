@@ -50,7 +50,7 @@
 	               	</sec:authorize>
                   <sec:authorize access="isAuthenticated() && !hasRole('ROLE_ADMIN')">
                   <li class="hidden-xs"><a href="/user/basket">장바구니</a></li>
-                  	<li class="hidden-xs"><a href="#">마이페이지</a></li>
+                  	<li class="hidden-xs"><a href="/user/mypage">마이페이지</a></li>
                   </sec:authorize>
                   <sec:authorize access="hasRole('ROLE_ADMIN')">
                   <li class="hidden-xs"><a href="#">홈페이지관리</a></li>

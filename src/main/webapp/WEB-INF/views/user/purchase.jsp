@@ -371,19 +371,25 @@
 	    	    	buyer_email : email
 	    	   }, function(rsp) {
 	    		    if ( rsp.success ) {
-	    		    		/* 	$.ajax({
+	    		    			$.ajax({
 	    		    				url:"/order/insert",
 	    		    				type:"post",
 	    		    				data : {
 	    		    					u_id : rsp.merchant_uid,
 	    		    					cost : rsp.paid_amount,
-	    		    					buyer_tel : rsp.buyer_tel,
 	    		    					buyer_addr : rsp.buyer_addr
 	    		    				},
+	    		    				beforeSend : function(xhr)
+	    			                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+	    			                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	    			                },
 	    		    				success: function(data){
-	    		    					
+	    		    					if(data=='success'){
+	    		    						alert('결제가 완료되었습니다');
+	    		    						location.href="/";
+	    		    					}
 	    		    				}
-	    		    			}); */
+	    		    			}); 
 	    		    		} else {
 	    		    			//[3] 아직 제대로 결제가 되지 않았습니다.
 	    		    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.

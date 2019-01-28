@@ -22,7 +22,7 @@
 	#total{
 		width:150px;
 	}
-	span{
+	table span{
 		padding: 5px 20px 5px 0;
 	}
 	.padbtn{

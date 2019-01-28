@@ -1,8 +1,6 @@
 package com.don.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -20,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.don.domain.Cart;
+import com.don.domain.Order;
 import com.don.domain.User;
 import com.don.service.CartService;
+import com.don.service.OrderService;
 import com.don.service.UserService;
 
 @Controller
@@ -32,6 +32,9 @@ public class UserController {
 	
 	@Autowired
 	private CartService cartService;
+	
+	@Autowired
+	private OrderService orderService;
 	
 	@Autowired
 	private HttpSession session;
@@ -142,5 +145,18 @@ public class UserController {
 		
 		return "success";
 		
+	}
+	
+	@RequestMapping(value = { "/user/mypage" }, method = RequestMethod.GET)
+	public String mypage(@AuthenticationPrincipal User user,Model model,@RequestParam(required=false) String tab) {
+		if("".equals(tab)||"order".equals(tab)) {
+			List<Order> orderList = orderService.selectList(user.getId());
+			model.addAttribute("status", orderService.getStatus(orderList));
+			model.addAttribute("orderList",orderList);
+		}else if("usermod".equals(tab)||"qna".equals(tab)) {
+			model.addAttribute("user",user);
+		}
+		
+		return "user/mypage";
 	}
 }
