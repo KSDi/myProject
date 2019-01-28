@@ -61,5 +61,9 @@ public class CartService {
 		return cartDao.selectOne(id);
 		
 	}
+
+	public void delete(int id) {
+		cartDao.delete(id);
+	}
 	
 }

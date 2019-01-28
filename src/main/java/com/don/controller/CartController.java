@@ -27,8 +27,9 @@ public class CartController {
 	
 	@RequestMapping(value="/cart/insert",method=RequestMethod.GET, produces="text/html; charset=utf-8")
 	@ResponseBody
-	public String insert(@RequestParam String model,@RequestParam String opt,
+	public String insert(@RequestParam String model,@RequestParam String opt,@RequestParam boolean dir,
 								  @AuthenticationPrincipal User user) {
+		
 		Cart cart = new Cart();
 		cart.setUser_id(user.getId());
 		cart.setModel(model);
@@ -52,14 +53,22 @@ public class CartController {
 			return html.toString();
 		}
 		
-		StringBuffer html = new StringBuffer();
-		html.append("<script>");
-		html.append("var check = confirm('장바구니로 이동하시겠습니까?');");
-		html.append("if(check){ location.href='/user/basket' }");
-		html.append("else{ location.href='/product/list' }");
-		html.append("</script>");
+		if(dir) {
+			StringBuffer html = new StringBuffer();
+			html.append("<script>");
+			html.append("location.href='/user/purchase' ");
+			html.append("</script>");
+			return html.toString();
+		}else {
+			StringBuffer html = new StringBuffer();
+			html.append("<script>");
+			html.append("var check = confirm('장바구니로 이동하시겠습니까?');");
+			html.append("if(check){ location.href='/user/basket' }");
+			html.append("else{ location.href='/product/list' }");
+			html.append("</script>");
+			return html.toString();
+		}
 		
-		return html.toString();
 	}
 	
 	
@@ -76,6 +85,12 @@ public class CartController {
 		map.put("total", cartService.getTotal(cartList));
 		
 		return map;
+	}
+	
+	@RequestMapping(value="/cart/delete",method=RequestMethod.GET)
+	public String cartDelete(@RequestParam int id) {
+		cartService.delete(id);
+		return "redirect:/user/basket";
 	}
 	
 }

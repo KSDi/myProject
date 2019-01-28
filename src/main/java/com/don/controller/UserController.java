@@ -91,7 +91,6 @@ public class UserController {
 		List<Cart> cartList = cartService.selectList(user.getId());
 		model.addAttribute("cartList",cartList);
 		model.addAttribute("total",cartService.getTotal(cartList));
-		System.out.println(user.getEmail());
 		return "/user/basket";
 	}
 	

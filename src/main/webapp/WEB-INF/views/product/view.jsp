@@ -10,7 +10,6 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/css/style.css" />
 <style>
-	
 	.pad{
 		padding: 15px 0;
 		border-radius: 0;
@@ -78,7 +77,7 @@
 								</optgroup>
 							</select>
 							<hr />
-							<button class="btn btn-block btn-dark pad" >지금구매</button>
+							<button class="btn btn-block btn-dark pad " onclick="purchase('${product.model}')" id="purbtn">지금구매</button>
 							<button class="btn btn-block btn-default pad" onclick="basket('${product.model}')" id="basketbtn">장바구니에 담기</button>
 						</div>
 					</div>
@@ -101,7 +100,17 @@
 				alert('필수 옵션을 선택해 주세요');
 				return;
 			}
-			location.href="/cart/insert?model="+ m + "&opt="+opt;
+			location.href="/cart/insert?model="+ m + "&opt="+opt+"&dir=false";
+		}
+
+		function purchase(m){
+			$('#purbtn').blur();
+			var opt =  $('#option').val();
+			if(opt == ""){
+				alert('필수 옵션을 선택해 주세요');
+				return;
+			}
+			location.href="/cart/insert?model="+ m + "&opt="+opt+"&dir=true";
 		}
 	</script>
 </body>
