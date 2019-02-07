@@ -35,5 +35,14 @@
 	<select id="selectCategoryList" resultType="String">
 		select category from category
 	</select>
+	
+	<select id="selectOrderProduct" parameterType="String" resultMap="selectProduct">
+		select * from order_products where order_id = #{value}
+	</select>
+	
+	<resultMap type="OrderProduct" id="selectProduct" >
+		<result column="product_id" property="product_id"/>
+		<association property="product" javaType="Product" column="product_id" select="product.selectOneByModel"/>
+	</resultMap>
 </mapper>
 

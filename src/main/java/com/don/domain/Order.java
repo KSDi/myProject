@@ -1,10 +1,25 @@
 package com.don.domain;
 
+import java.util.List;
+
 public class Order {
-	String u_id,buyer_id,addr,status,regdate;
-	
+	String u_id,buyer_id,addr,status,regdate,delivery_name;
 	int cost;
+	List<OrderProduct> products; 
 	
+	
+	public String getDelivery_name() {
+		return delivery_name;
+	}
+	public void setDelivery_name(String delivery_name) {
+		this.delivery_name = delivery_name;
+	}
+	public List<OrderProduct> getProducts() {
+		return products;
+	}
+	public void setProducts(List<OrderProduct> products) {
+		this.products = products;
+	}
 	public String getRegdate() {
 		return regdate;
 	}

@@ -99,6 +99,11 @@ public class UserService implements UserDetailsService{
 	public void updateEmail(User user) {
 		userDao.updateEmail(user);
 	}
+
+	public void updatePassword(User modUser) {
+		userDao.updatePassword(modUser);
+		
+	}
 	
 	
 }

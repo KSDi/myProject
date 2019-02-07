@@ -60,6 +60,13 @@
 									</tr>
 								</thead>
 								<tbody>
+									<c:if test="${empty cartList }">
+										<tr>
+											<td colspan="7" style="height:200px;padding-top:100px;">
+												<span><i class="glyphicon glyphicon-shopping-cart"></i> 장바구니가 비어있습니다</span>
+											</td>
+										</tr>
+									</c:if>
 									<c:forEach var="cart" items="${cartList }">
 										<tr>
 											<td><img src="/image/${cart.product.category }/${cart.product.image }"
@@ -119,10 +126,10 @@
 						</div>
 						<div class="row" style="margin-top : 40px;">
 							<div class="col-sm-4 col-sm-offset-1">
-								<button class="btn btn-block btn-default padbtn" onclick="location.href='/'">계속 쇼핑하기</button>
+								<button class="btn btn-block btn-default padbtn" type="button" onclick="location.href='/'">계속 쇼핑하기</button>
 							</div>
 							<div class="col-sm-4 col-sm-offset-2">
-								<button class="btn btn-block btn-primary padbtn" onclick="location.href='/user/purchase'">구매하기</button>
+								<button class="btn btn-block btn-primary padbtn" type="button" onclick="purchase();">구매하기</button>
 							</div>
 						</div>
 					</div>
@@ -135,6 +142,13 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script>
+		function purchase(){
+			if(${empty cartList}){
+				alert('한개 이상의 물품을 장바구니에 넣어주세요');
+				return;
+			}
+			location.href="/user/purchase"
+		}
 		function updateCount(id,stat){
 			var count = $('#input_'+id).val();
 			if(stat == 'plus'){

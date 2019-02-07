@@ -112,7 +112,6 @@
 	.pur_sec{
 		width:90%;
 		margin : 0 auto;
-		
 	}
 </style>
 </head>
@@ -185,7 +184,7 @@
 						<th class="table-first">이름</th>
 						<td class="table-second">
 							<div class="col-sm-4">
-								<input type="text" class="form-control" value="${user.name }"/>
+								<input type="text" class="form-control" id="delivery_name"value="${user.name }"/>
 							</div>
 						</td>
 					</tr>
@@ -346,19 +345,24 @@
 	    
 	    
 	    function purchase(){
+	    	var cost = parseInt($("#cost").val());
+	    	var name = "${user.id}";
+	    	var delivery_name =$("#delivery_name").val();
+	    	var phone = $("#phone").val();
+	    	var addr = $("#roadAddress").val()+" "+$("#extraAddress").val()+" "+$("#detailAddress").val();
+	    	var email = $("#email").val();
+	    	
 	    	if($("#detailAddress").val() ==""){
 	    		alert("상세주소를 입력해주세요");
 	    		return;
 	    	}else if($("#roadAddress").val()==""){
 	    		alert("주소를 입력해주세요");
 	    		return;
+	    	}else if(delivery_name==""){
+	    		alert("받으실 분의 성함을 입력해주세요");
+	    		return;
 	    	}
 	    	
-	    	var cost = parseInt($("#cost").val());
-	    	var name = "${user.id}";
-	    	var phone = $("#phone").val();
-	    	var addr = $("#roadAddress").val()+" "+$("#extraAddress").val()+" "+$("#detailAddress").val();
-	    	var email = $("#email").val();
 	    	   IMP.request_pay({
 	    	      pg : 'kakaopay', // 결제방식
 	    	       pay_method : 'card',	// 결제 수단
@@ -368,7 +372,8 @@
 	    	      buyer_name :  name,	// 구매자 이름
 	    	       buyer_tel :  '010-4288-9979',	// 구매자 전화번호
 	    	    	buyer_addr : addr,
-	    	    	buyer_email : email
+	    	    	buyer_email : email,
+	    	    	custom_data : delivery_name
 	    	   }, function(rsp) {
 	    		    if ( rsp.success ) {
 	    		    			$.ajax({
@@ -377,7 +382,8 @@
 	    		    				data : {
 	    		    					u_id : rsp.merchant_uid,
 	    		    					cost : rsp.paid_amount,
-	    		    					buyer_addr : rsp.buyer_addr
+	    		    					buyer_addr : rsp.buyer_addr,
+	    		    					delivery_name : custom_data
 	    		    				},
 	    		    				beforeSend : function(xhr)
 	    			                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/

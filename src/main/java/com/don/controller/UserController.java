@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.don.dao.UserDao;
 import com.don.domain.Cart;
 import com.don.domain.Order;
 import com.don.domain.User;
@@ -148,15 +149,65 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = { "/user/mypage" }, method = RequestMethod.GET)
-	public String mypage(@AuthenticationPrincipal User user,Model model,@RequestParam(required=false) String tab) {
-		if("".equals(tab)||"order".equals(tab)) {
-			List<Order> orderList = orderService.selectList(user.getId());
-			model.addAttribute("status", orderService.getStatus(orderList));
-			model.addAttribute("orderList",orderList);
-		}else if("usermod".equals(tab)||"qna".equals(tab)) {
-			model.addAttribute("user",user);
-		}
+	public String mypage(@AuthenticationPrincipal User user,Model model) {
+		model.addAttribute("user",user);
+		List<Order> orderList = orderService.selectList(user.getId());
+		model.addAttribute("status", orderService.getStatus(orderList));
+		model.addAttribute("orderList",orderList);
 		
 		return "user/mypage";
+	}
+	
+	@RequestMapping(value = { "/user/modify" }, method = RequestMethod.GET)
+	public String modify(@AuthenticationPrincipal User user,Model model) {
+		model.addAttribute("user",user);
+		if(session.getAttribute("checkPassword") == null) {
+			return "user/checkpassword";
+		}
+		/*session.invalidate();*/
+		return "user/modify";
+	}
+	
+	@RequestMapping(value = { "/user/modify" }, method = RequestMethod.POST)
+	public String modify(@AuthenticationPrincipal User user,@ModelAttribute User modUser,@RequestParam String currntPw,Model model) {
+		System.out.println(modUser);
+		System.out.println(currntPw);
+		if(!currntPw.equals(user.getPassword())) {
+			model.addAttribute("user",user);
+			model.addAttribute("msg","현재 비밀번호를 재확인하세요.");
+			model.addAttribute("url","/user/modify");
+			return "etc/result";
+		}
+		if(modUser.getPassword()==null ||modUser.getCheckPassword()==null ||modUser.getPassword().equals(user.getPassword())|| !modUser.getCheckPassword().equals(modUser.getPassword())) {
+			model.addAttribute("user",user);
+			model.addAttribute("msg","신규 비밀번호를 재확인하세요.");
+			model.addAttribute("url","/user/modify");
+			return "etc/result";
+		}
+		modUser.setId(user.getId());
+		userService.updatePassword(modUser);
+		model.addAttribute("msg","비밀번호 변경이 완료 되었습니다. 재 로그인해주십시오.");
+		model.addAttribute("url","/user/signout");
+		return "etc/result";
+	}
+	
+	
+	@RequestMapping(value = { "/user/checkpassword" }, method = RequestMethod.POST)
+	@ResponseBody
+	public String checkPassword(@AuthenticationPrincipal User user,@RequestParam String password) {
+		if(!password.equals(userService.selectOneById(user.getId()).getPassword())){
+			return "notSamePassword";
+		}
+		session.setAttribute("checkPassword", true);
+		return "success";
+	}
+	
+	@RequestMapping(value = { "/user/checkRealPw" }, method = RequestMethod.POST)
+	@ResponseBody
+	public String checkRealPw(@AuthenticationPrincipal User user, @RequestParam String pw) {
+		if(!user.getPassword().equals(pw)) {
+			return "unmatch";
+		}
+		return "match";
 	}
 }

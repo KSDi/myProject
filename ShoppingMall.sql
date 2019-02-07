@@ -34,7 +34,9 @@ create table order_products(
 );
 update orders set status='배송준비';
 select * from orders;
+update orders set delivery_name ='김상돈';
 desc orders;
+alter table orders add (delivery_name varchar2(15));
 alter table orders add (status varchar2(10) check (status in('배송준비','배송중','배송완료')));
 alter table orders modify (status varchar2(12));
 desc order_products;
@@ -44,4 +46,5 @@ alter table orders modify (regdate systimestamp);
 alter table order_products modify (product_opt varchar2(30));
 alter table order_products add (count number);
 create sequence seq_order_products_id;
-select currval('seq_order_products_id');
+select * from product;
+select * from cart;

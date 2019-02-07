@@ -28,7 +28,7 @@ public class OrderController {
 	@RequestMapping(value = { "/order/insert" }, method = RequestMethod.POST, produces="text/html; charset=utf-8")
 	@ResponseBody
 	public String purchase(@RequestParam String u_id, @RequestParam int cost,
-									   @RequestParam String buyer_addr,
+									   @RequestParam String buyer_addr,@RequestParam String delivery_name,
 									   @AuthenticationPrincipal User user) {
 		
 		Order order = new Order();
@@ -36,6 +36,7 @@ public class OrderController {
 		order.setBuyer_id(user.getId());
 		order.setAddr(buyer_addr);
 		order.setCost(cost);
+		order.setDelivery_name(delivery_name);
 		order.setStatus("배송준비");
 		
 		orderService.insertOrder(order);
@@ -44,7 +45,7 @@ public class OrderController {
 		for(Cart cart : cartList) {
 			orderService.insertOrderProduct(u_id,cart.getModel(),cart.getOpt(),cart.getCount());
 		}
-		
+		cartService.deleteCart(user.getId());
 		return "success";
 	}
 }

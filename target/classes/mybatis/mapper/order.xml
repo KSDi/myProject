@@ -4,14 +4,21 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="order">
 	<insert id="insertOrder" parameterType="Order">
-		insert into orders values(#{u_id},#{buyer_id},sysdate,#{addr},#{cost},#{status})
+		insert into orders values(#{u_id},#{buyer_id},sysdate,#{addr},#{cost},#{status},#{delivery_name})
 	</insert>
 	<insert id="insertOrderProduct" parameterType="Map">
 		insert into order_products values(seq_order_products_id.nextval,#{u_id},#{product_id},#{product_opt},#{count})
 	</insert>
-	<select id="selectList" parameterType="String" resultType="Order">
+	
+	
+	<select id="selectList" parameterType="String" resultMap="selectOrderProduct">
 		select * from orders where buyer_id = #{value}
 	</select>
+	
+	<resultMap type="Order" id="selectOrderProduct">
+		<result column="u_id" property="u_id"/>
+		<collection property="products" column="u_id" ofType="OrderProduct" select="product.selectOrderProduct"/>
+	</resultMap>
 </mapper>
 
 

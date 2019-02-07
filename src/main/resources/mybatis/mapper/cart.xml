@@ -32,5 +32,9 @@
 	<delete id="delete" parameterType="int">
 		delete from cart where id = #{value}
 	</delete>
+	
+	<delete id="deleteCart" parameterType="String">
+		delete from cart where user_id = #{value}
+	</delete>
 </mapper>
 

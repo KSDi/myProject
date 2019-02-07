@@ -32,6 +32,11 @@ public class UserDao {
 		System.out.println(user);
 		session.update("user.updateEmail",user);
 	}
+
+	public void updatePassword(User modUser) {
+		session.update("user.updatePassword",modUser);
+		
+	}
 	
 	
 }

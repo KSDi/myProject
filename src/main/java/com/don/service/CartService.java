@@ -65,5 +65,10 @@ public class CartService {
 	public void delete(int id) {
 		cartDao.delete(id);
 	}
+
+	public void deleteCart(String id) {
+		cartDao.deleteCart(id);
+		
+	}
 	
 }

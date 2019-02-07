@@ -38,5 +38,10 @@ public class CartDao {
 		session.delete("cart.delete",id);
 		
 	}
+
+	public void deleteCart(String id) {
+		session.delete("cart.deleteCart",id);
+		
+	}
 	
 }
