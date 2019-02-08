@@ -55,7 +55,7 @@
                   <sec:authorize access="hasRole('ROLE_ADMIN')">
                   <li class="hidden-xs"><a href="#">홈페이지관리</a></li>
                   </sec:authorize>
-                  <li class="hidden-xs"><a href="#">배송조회</a></li>
+                  <li class="hidden-xs"><a href="https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=%EB%B0%B0%EC%86%A1%EC%A1%B0%ED%9A%8C">배송조회</a></li>
                 </ul>
               </div>
             </div>

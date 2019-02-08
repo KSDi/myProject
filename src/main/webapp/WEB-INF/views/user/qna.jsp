@@ -55,52 +55,25 @@
 	    font-size : 20px;
 	    font-weight:600;
 	}
-	.pswdcheck{
-		height:600px;
-	}
-	.form-control{
-		display : inline-block;
-		width:63%;
-		height:45px;
-	}
-	.label-control{
-		text-align:right;
-		width:25%;
-		margin-right:20px;
-		
-	}
-	.checkBtn{
-		width:100px;
-		height:100px;
-		float:left;
-		border-radius: 10px;
-    	background-color: #6cb5e0;
-    	line-height: 100px;
-    	text-align: center;
-    	color:white;
-    	font-size:25px;
-	}
-	.wrapper{
-		padding-top : 7%;
-		padding-left : 10%;
-	}
-	.pd{
-		margin-top : 10px;
-	}
 	.mod_title{
 	    padding-top: 10px;
 	    padding-bottom: 5px;
 	    border-left: 5px solid #101010;
 	    margin-top: 30px;
-
 	}
-	.form-control[readonly]{
-		cursor: default;
+	td>a:not(.btn){
+		padding-left:15px;
+		line-height: 55px;
+	    width: 100%;
+	    display: block;
+	    
 	}
-	#error{
-		font-size:13px;
-		text-align:center;
-		color:red;
+	.table>tbody>tr>td{
+		padding:0;
+	}
+	.well{
+		margin-top:10px;
+		margin-bottom:10px;
 	}
 </style>
 </head>
@@ -116,19 +89,19 @@
 					<jsp:include page="../left_menu.jsp"/>
 				</div>
 				<div class="col-sm-8 col-xs-12">
-					<div class="tab-line row">
+						<div class="tab-line row">
 							<ul class="tab-list text-center">
 								<li class="tab">
 									<a href="/user/mypage" class="tab-link">
 										<span class="tab-name">주문목록/배송조회</span>
 									</a>
 								</li>
-								<li class="tab tab-selected">
+								<li class="tab">
 									<a href="/user/modify" class="tab-link">
 										<span class="tab-name">개인정보수정</span>
 									</a>
 								</li>
-								<li class="tab">
+								<li class="tab tab-selected">
 									<a href="/user/qna" class="tab-link">
 										<span class="tab-name">1:1 문의</span>
 									</a>
@@ -136,26 +109,78 @@
 							</ul>
 						</div>
 						<div class="col-xs-12 mod_title">
-							<h1>비밀번호 확인 </h1>
-							<span style="color:#aaa; padding-left:15px;">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.</span>
+							<h1>1&nbsp;:&nbsp;1 문의 </h1>
 						</div>
-						<div class="pswdcheck col-xs-12">
-							<div class="wrapper col-xs-12 ">
-								<div class="col-xs-9">
-									<div>
-										<label for="" class="label-control" >아이디</label>
-										<input type="text" readonly class="form-control" value="${user.id }"/>
-									</div>
-									<div class="pd">
-										<label for="" class="label-control" >비밀번호</label>
-										<input type="password" id="password" class="form-control"/>
-									</div>
-								</div>
-								<div class="col-xs-2">
-									<a href="javascript:check();" class="checkBtn">확인</a>
-								</div>
-							</div>
-							<p id="error"></p>
+						<div class="row">
+							<table class="table table-board">
+								<thead>
+									<tr>
+										<th width="15%">번호</th>
+										<th width="55%">제목</th>
+										<th width="15%">작성일</th>
+										<th width="15%">상태</th>
+									</tr>
+								</thead>
+								<tbody>
+								<c:forEach var="question" items="${questionList}" varStatus="i">
+									<tr style="cursor:pointer;">
+										<td>
+											<a href="#question_${i.index +1 }" role="button" 
+													data-toggle="collapse" aria-expanded="false" 
+														aria-controls="collapseExample">
+												${i.index + 1 }
+											</a>
+										</td>
+										<td>
+											<a href="#question_${i.index +1 }" role="button" 
+													data-toggle="collapse" aria-expanded="false" 
+														aria-controls="collapseExample">
+												${question.title }
+											</a>
+										</td>
+										<td>
+											<a href="#question_${i.index +1 }" role="button" 
+													data-toggle="collapse" aria-expanded="false" 
+														aria-controls="collapseExample">
+												<fmt:parseDate value="${question.regdate }" var="regdate" pattern="yyyy-mm-dd"/>
+												<fmt:formatDate value="${regdate }" pattern="yy-mm-dd"/>
+											</a>
+										</td>
+										<td>
+											<a href="#question_${i.index +1 }" role="button" 
+													data-toggle="collapse" aria-expanded="false" 
+														aria-controls="collapseExample">
+												${question.status  }												
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<div class="collapse" id="question_${i.index +1 }">
+												<div class="well">
+													${question.content }
+												</div>
+											</div>
+										</td>
+									</tr>
+								</c:forEach>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="5" class="text-right">
+											<a href="/user/qna/insert"
+											   class="btn btn-primary">글쓰기</a>
+										</td>
+									</tr><%-- 
+									<tr>
+										<td colspan="5" style="border-top:none;">
+											<ul class="pagination">
+												${pageHTML }
+											</ul>
+										</td>
+									</tr> --%>
+								</tfoot>
+							</table>
 						</div>
 				</div>
 				<div class="col-sm-2"></div>
@@ -165,26 +190,6 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-	<script>
-		function check(){
-			$.ajax({
-				url:"/user/checkpassword",
-				type:"post",
-				data:{password : $("#password").val()},
-				beforeSend : function(xhr)
-                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-                },
-                success : function(data){
-                	if(data=="success"){
-                		location.href="/user/modify";
-                	}else{
-                		$("#password").css({borderColor:"red"});
-                		$("#error").text("비밀번호가 일치하지 않습니다. 다시 입력해주세요");
-                	}
-                }
-			});
-		}
-	</script>
+	
 </body>
 </html>

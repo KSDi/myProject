@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <title>Insert title here</title>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 <style>
 	.tab-line{
 		border-bottom:2px solid #3d82f7;
@@ -55,52 +57,31 @@
 	    font-size : 20px;
 	    font-weight:600;
 	}
-	.pswdcheck{
-		height:600px;
-	}
-	.form-control{
-		display : inline-block;
-		width:63%;
-		height:45px;
-	}
-	.label-control{
-		text-align:right;
-		width:25%;
-		margin-right:20px;
-		
-	}
-	.checkBtn{
-		width:100px;
-		height:100px;
-		float:left;
-		border-radius: 10px;
-    	background-color: #6cb5e0;
-    	line-height: 100px;
-    	text-align: center;
-    	color:white;
-    	font-size:25px;
-	}
-	.wrapper{
-		padding-top : 7%;
-		padding-left : 10%;
-	}
-	.pd{
-		margin-top : 10px;
-	}
 	.mod_title{
 	    padding-top: 10px;
 	    padding-bottom: 5px;
 	    border-left: 5px solid #101010;
 	    margin-top: 30px;
-
 	}
-	.form-control[readonly]{
-		cursor: default;
+	td>a:not(.btn){
+		padding-left:15px;
+		line-height: 55px;
+	    width: 100%;
+	    display: block;
+	    
 	}
-	#error{
-		font-size:13px;
-		text-align:center;
-		color:red;
+	.table>tbody>tr>td{
+		padding:0;
+	}
+	.well{
+		margin-top:10px;
+		margin-bottom:10px;
+	}
+	.panel{
+		margin-top: 20px;
+		padding : 0;
+	    width: 98%;
+	    margin-left: 1%;
 	}
 </style>
 </head>
@@ -116,19 +97,19 @@
 					<jsp:include page="../left_menu.jsp"/>
 				</div>
 				<div class="col-sm-8 col-xs-12">
-					<div class="tab-line row">
+						<div class="tab-line row">
 							<ul class="tab-list text-center">
 								<li class="tab">
 									<a href="/user/mypage" class="tab-link">
 										<span class="tab-name">주문목록/배송조회</span>
 									</a>
 								</li>
-								<li class="tab tab-selected">
+								<li class="tab">
 									<a href="/user/modify" class="tab-link">
 										<span class="tab-name">개인정보수정</span>
 									</a>
 								</li>
-								<li class="tab">
+								<li class="tab tab-selected">
 									<a href="/user/qna" class="tab-link">
 										<span class="tab-name">1:1 문의</span>
 									</a>
@@ -136,26 +117,34 @@
 							</ul>
 						</div>
 						<div class="col-xs-12 mod_title">
-							<h1>비밀번호 확인 </h1>
-							<span style="color:#aaa; padding-left:15px;">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 확인합니다.</span>
+							<h1>1&nbsp;:&nbsp;1 문의 </h1>
 						</div>
-						<div class="pswdcheck col-xs-12">
-							<div class="wrapper col-xs-12 ">
-								<div class="col-xs-9">
-									<div>
-										<label for="" class="label-control" >아이디</label>
-										<input type="text" readonly class="form-control" value="${user.id }"/>
-									</div>
-									<div class="pd">
-										<label for="" class="label-control" >비밀번호</label>
-										<input type="password" id="password" class="form-control"/>
-									</div>
-								</div>
-								<div class="col-xs-2">
-									<a href="javascript:check();" class="checkBtn">확인</a>
-								</div>
+						<div class="col-xs-12 panel panel-primary">
+							<div class="panel-heading">
+								<h4>글쓰기</h4>
 							</div>
-							<p id="error"></p>
+							<div class="panel-body">
+								<form:form action="/user/qna/insert" method="post"
+										   modelAttribute="question">
+									<div class="form-group">
+										<form:input
+											   class="form-control"
+											   path="title" 
+											   placeholder="제목을 입력해 주세요"/>
+										<form:errors path="title" class="error"/>
+									</div>
+									<div class="form-group">
+										<form:textarea class="form-control" id="content"
+												  path="content"
+												  placeholder="내용을 입력해 주세요"></form:textarea>
+										<form:errors path="content" class="error"/>		  
+									</div>
+									<div class="form-group text-right">
+										<button class="btn btn-primary"
+												type="submit">등록</button>
+									</div>
+								</form:form>
+							</div>
 						</div>
 				</div>
 				<div class="col-sm-2"></div>
@@ -165,24 +154,50 @@
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/lang/summernote-ko-KR.min.js"></script>
 	<script>
-		function check(){
+		$("#content").summernote({
+			height:400,
+			//focus: true,
+			disableResizeEditor:true,
+			lang: 'ko-KR',
+			callbacks:{
+				onImageUpload:sendFile,
+				onMediaDelete:deleteFile
+			}
+		});
+		function deleteFile(target){
+			var src = target[0].src.substring(21);
+			console.log("src",src);
 			$.ajax({
-				url:"/user/checkpassword",
+				url:"/filedelete",
 				type:"post",
-				data:{password : $("#password").val()},
-				beforeSend : function(xhr)
-                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-                    xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-                },
-                success : function(data){
-                	if(data=="success"){
-                		location.href="/user/modify";
-                	}else{
-                		$("#password").css({borderColor:"red"});
-                		$("#error").text("비밀번호가 일치하지 않습니다. 다시 입력해주세요");
-                	}
-                }
+				data:{src:src},
+				success:function(data){
+					console.log(data);
+				}
+			});
+		}
+		
+		function sendFile(files, editor, welEditable){
+			//console.log(files[0]);
+			var data = new FormData();
+			data.append('upload', files[0]);
+			
+			$.ajax({
+				url:"/fileupload",
+				contentType:false,
+				processData:false,
+				data:data,
+				type:"post",
+				success:function(data){
+					//console.log(data);
+					$("#content").summernote(
+							'editor.insertImage', data.url);
+				},error:function(error){
+					console.error(error);
+				}
 			});
 		}
 	</script>

@@ -94,11 +94,9 @@
 		cursor: default;
 	}
 	
-	#email-error{
-		height:34px;
-		line-height:34px;
-		padding-left:33px;
+	[id $= error],#errors{
 		font-size:12px;
+		margin-bottom: -15px;
 	}
 	#ast{
 		padding-left:2px;
@@ -143,14 +141,14 @@
 									</a>
 								</li>
 								<li class="tab">
-									<a href="/user/mypage" class="tab-link">
+									<a href="/user/qna" class="tab-link">
 										<span class="tab-name">1:1 문의</span>
 									</a>
 								</li>
 							</ul>
 						</div>
 						<div class="col-xs-12 mod_title">
-							<h1>회원정보 수정 </h1>
+							<h1>개인정보 수정 </h1>
 						</div>
 						<div class="row mg_b">
 							<div class="wrapper col-xs-12">

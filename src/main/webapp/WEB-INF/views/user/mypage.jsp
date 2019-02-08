@@ -100,6 +100,7 @@
 		text-align: center;
 		padding : 20px 10px;
 	}
+	
 </style>
 </head>
 
@@ -127,7 +128,7 @@
 									</a>
 								</li>
 								<li class="tab">
-									<a href="/user/mypage" class="tab-link">
+									<a href="/user/qna" class="tab-link">
 										<span class="tab-name">1:1 문의</span>
 									</a>
 								</li>
@@ -201,6 +202,7 @@
 				<div class="col-sm-2"></div>
 			</div>
 		</div>
+		<jsp:include page="../footer.jsp" />
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>

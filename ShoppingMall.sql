@@ -6,6 +6,7 @@ create table users (
     name varchar2(10) NOT NULL,
     phone varchar2(12) NOT NULL
 );
+select * from users;
 desc authority;
 drop table users;
 desc users;

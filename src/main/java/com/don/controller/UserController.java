@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.don.dao.UserDao;
 import com.don.domain.Cart;
 import com.don.domain.Order;
+import com.don.domain.Question;
 import com.don.domain.User;
+import com.don.service.BoardService;
 import com.don.service.CartService;
 import com.don.service.OrderService;
 import com.don.service.UserService;
@@ -36,6 +38,9 @@ public class UserController {
 	
 	@Autowired
 	private OrderService orderService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	@Autowired
 	private HttpSession session;
@@ -210,4 +215,6 @@ public class UserController {
 		}
 		return "match";
 	}
+	
+
 }
