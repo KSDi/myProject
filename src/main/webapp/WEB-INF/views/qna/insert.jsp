@@ -63,25 +63,14 @@
 	    border-left: 5px solid #101010;
 	    margin-top: 30px;
 	}
-	td>a:not(.btn){
-		padding-left:15px;
-		line-height: 55px;
-	    width: 100%;
-	    display: block;
-	    
-	}
-	.table>tbody>tr>td{
-		padding:0;
-	}
-	.well{
-		margin-top:10px;
-		margin-bottom:10px;
-	}
 	.panel{
 		margin-top: 20px;
 		padding : 0;
 	    width: 98%;
 	    margin-left: 1%;
+	}
+	form .col-xs-12 {
+		padding : 0;
 	}
 </style>
 </head>
@@ -119,7 +108,7 @@
 						<div class="col-xs-12 mod_title">
 							<h1>1&nbsp;:&nbsp;1 문의 </h1>
 						</div>
-						<div class="col-xs-12 panel panel-primary">
+						<div class="panel panel-primary col-xs-12">
 							<div class="panel-heading">
 								<h4>글쓰기</h4>
 							</div>
@@ -174,6 +163,9 @@
 				url:"/filedelete",
 				type:"post",
 				data:{src:src},
+				beforeSend : function(xhr){   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+	                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	            },
 				success:function(data){
 					console.log(data);
 				}
@@ -191,6 +183,9 @@
 				processData:false,
 				data:data,
 				type:"post",
+				beforeSend : function(xhr){   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+	                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	            },
 				success:function(data){
 					//console.log(data);
 					$("#content").summernote(

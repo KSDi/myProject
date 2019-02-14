@@ -15,7 +15,12 @@ public class BoardDao {
 	private SqlSession session;
 
 	public List<Question> selectQuestionList(String id) {
-		return session.selectList("board.selectQuestionList",id);
+		return session.selectList("qna.selectList",id);
+	}
+
+	public void insertQna(Question question) {
+		session.insert("qna.insertQna",question);
+		
 	}
 	
 	

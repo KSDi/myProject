@@ -383,9 +383,9 @@
 	    		method:"post",
 	    		data:{email : $('#email').val(),
 	    				  emailCode : $("#emailCode").val()},
-					beforeSend : function(xhr){   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-	                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-	            },
+				beforeSend : function(xhr){   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+               		 xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+          	    },
 	    		success:function(data){
 	    			if(data == "success"){
 	    				$("#email-error").text("변경이 완료되었습니다").css({color:"green"});

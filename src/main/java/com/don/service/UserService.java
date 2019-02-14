@@ -104,6 +104,10 @@ public class UserService implements UserDetailsService{
 		userDao.updatePassword(modUser);
 		
 	}
+
+	public int selectNewUser() {
+		return userDao.selectNewUser();
+	}
 	
 	
 }

@@ -27,6 +27,15 @@ public class OrderDao {
 	public List<Order> selectList(String id) {
 		return session.selectList("order.selectList",id);
 	}
+
+	public List<Order> getTodayOrders() {
+		return session.selectList("order.getTodayOrders");
+	}
+
+	public List<Order> selectListByStat(String stat) {
+		return session.selectList("order.selectListByStat",stat);
+		
+	}
 	
 
 }

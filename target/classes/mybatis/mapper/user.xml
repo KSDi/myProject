@@ -37,7 +37,9 @@
 	<update id="updatePassword" parameterType="User">
 		update users set password=#{password} where id = #{id}
 	</update>
-	
+	<select id="selectNewUser" resultType="int">
+		select count(*) from users where trunc(regdate) = trunc(sysdate)
+	</select>
 </mapper>
 
 

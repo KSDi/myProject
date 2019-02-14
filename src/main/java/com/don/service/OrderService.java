@@ -59,6 +59,23 @@ public class OrderService {
 		
 	}
 
+	public List<Order> getTodayOrders() {
+		return orderDao.getTodayOrders();
+	}
+
+	public List<Order> selectListByStat(String stat) {
+		
+		return orderDao.selectListByStat(stat);
+	}
+
+	public int getTodayRevenue(List<Order> todayOrdersList) {
+		int total = 0;
+		for(Order todayOrder : todayOrdersList) {
+			total += todayOrder.getCost();
+		}
+		return total;
+	}
+
 	
 	
 }

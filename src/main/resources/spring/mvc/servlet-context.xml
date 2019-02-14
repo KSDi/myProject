@@ -32,7 +32,9 @@
 		location="/WEB-INF/public/image/" />
 	<mvc:resources mapping="/js/**"
 		location="/WEB-INF/public/js/" />
-	<mvc:resources mapping="/upload/**" location="/upload/" />
+	<mvc:resources mapping="/fonts/**"
+		location="/WEB-INF/public/fonts/" />
+	<mvc:resources mapping="/upload/**" location="/WEB-INF/upload/" />
 
 	<mvc:annotation-driven>
 		<mvc:argument-resolvers>

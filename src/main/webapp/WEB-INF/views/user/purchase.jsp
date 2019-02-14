@@ -383,7 +383,7 @@
 	    		    					u_id : rsp.merchant_uid,
 	    		    					cost : rsp.paid_amount,
 	    		    					buyer_addr : rsp.buyer_addr,
-	    		    					delivery_name : custom_data
+	    		    					delivery_name : rsp.custom_data
 	    		    				},
 	    		    				beforeSend : function(xhr)
 	    			                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/

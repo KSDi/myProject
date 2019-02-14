@@ -15,10 +15,23 @@
 		select * from orders where buyer_id = #{value}
 	</select>
 	
+	<select id="getTodayOrders" resultMap="selectOrderProduct">
+		select * from orders where trunc(regdate) = trunc(sysdate) order by u_id ASC
+	</select>
+	
+	<select id="selectListByStat" parameterType="String" resultMap="selectOrderProduct">
+		select * from orders where 
+	    status = <if test="_parameter == 'wait'">'배송준비'</if>
+					 <if test="_parameter == 'delivery'">'배송중'</if>
+					 <if test="_parameter == 'complete'">'배송완료'</if>
+	</select>
+	
 	<resultMap type="Order" id="selectOrderProduct">
 		<result column="u_id" property="u_id"/>
 		<collection property="products" column="u_id" ofType="OrderProduct" select="product.selectOrderProduct"/>
 	</resultMap>
+	
+	
 </mapper>
 
 

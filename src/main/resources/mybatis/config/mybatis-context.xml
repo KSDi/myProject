@@ -11,7 +11,7 @@
     <mapper resource="mybatis/mapper/product.xml"/>
     <mapper resource="mybatis/mapper/cart.xml"/>
     <mapper resource="mybatis/mapper/order.xml"/>
-    <mapper resource="mybatis/mapper/board.xml"/>
+    <mapper resource="mybatis/mapper/qna.xml"/>
   </mappers>
 </configuration>
 

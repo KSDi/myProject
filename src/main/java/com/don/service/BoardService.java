@@ -17,5 +17,10 @@ public class BoardService {
 	public List<Question> selectQuestionList(String id) {
 		return boardDao.selectQuestionList(id);
 	}
+
+	public void insertQna(Question question) {
+		
+		boardDao.insertQna(question);
+	}
 	
 }

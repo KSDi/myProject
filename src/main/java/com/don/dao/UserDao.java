@@ -37,6 +37,10 @@ public class UserDao {
 		session.update("user.updatePassword",modUser);
 		
 	}
+
+	public int selectNewUser() {
+		return session.selectOne("user.selectNewUser");
+	}
 	
 	
 }
