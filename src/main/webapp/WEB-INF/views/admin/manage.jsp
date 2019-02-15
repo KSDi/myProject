@@ -1,61 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+	rel="stylesheet">
 <link href="/css/bootstrap.min.css" rel="stylesheet">
 <link href="/css/font-awesome.min.css" rel="stylesheet">
 <link href="/css/datepicker3.css" rel="stylesheet">
 <link href="/css/styles_dash.css" rel="stylesheet">
-	<!-- Styles -->
+<!-- Styles -->
 <style>
 #chartdiv {
-  width: 100%;
-  height: 500px;
+	width: 100%;
+	height: 470px;
 }
 
 .amcharts-export-menu-top-right {
-  top: 10px;
-  right: 0;
+	top: 10px;
+	right: 0;
 }
-.dropdown-menu{
-	top:110%;
+
+.dropdown-menu {
+	top: 110%;
 }
+.canvas-wrapper{
+	margin-bottom:-70px;
+}
+g[aria-labelledby="id-47-title"]{display:none;}
 </style>
 </head>
 <body>
-<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span></button>
-			<a class="navbar-brand" href="#"><span>DSHOP&nbsp;</span>Admin</a>
-			<ul class="nav navbar-top-links navbar-right">
-					<li class="dropdown"><a class="dropdown-toggle count-info" href="/">
-						<em class="fa fa-home"></em>
-					</a>
-				</li>
-			</ul>
-			
-			
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span>DSHOP&nbsp;</span>Admin</a>
+				<ul class="nav navbar-top-links navbar-right">
+					<li class="dropdown"><a class="dropdown-toggle count-info"
+						href="/"> <em class="fa fa-home"></em>
+					</a></li>
+				</ul>
+
+
+			</div>
 		</div>
-	</div><!-- /.container-fluid -->
-</nav>
+		<!-- /.container-fluid -->
+	</nav>
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive"
+					alt="">
 			</div>
 			<div class="profile-usertitle">
 				<div class="profile-usertitle-name">Admin</div>
-				<div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+				<div class="profile-usertitle-status">
+					<span class="indicator label-success"></span>Online
+				</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -66,46 +78,53 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li class="active"><a href="#"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-			<li ><a href="#"><em class="fa fa-bar-chart">&nbsp;</em> Charts</a></li>
+			<li class="active"><a href="#"><em class="fa fa-dashboard">&nbsp;</em>
+					Dashboard</a></li>
+			<li><a href="#"><em class="fa fa-bar-chart">&nbsp;</em>
+					Charts</a></li>
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-				<em class="fa fa-navicon">&nbsp;</em> Orders <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
-				</a>
+					<em class="fa fa-navicon">&nbsp;</em> Orders <span
+					data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em
+						class="fa fa-plus"></em></span>
+			</a>
 				<ul class="children collapse" id="sub-item-1">
-					<li><a class="" href="#">
-						<span class="fa fa-arrow-right">&nbsp;</span> 배송대기
+					<li><a class="" href="#"> <span class="fa fa-arrow-right">&nbsp;</span>
+							배송대기
 					</a></li>
-					<li><a class="" href="#">
-						<span class="fa fa-arrow-right">&nbsp;</span> 배송중
+					<li><a class="" href="#"> <span class="fa fa-arrow-right">&nbsp;</span>
+							배송중
 					</a></li>
-					<li><a class="" href="#">
-						<span class="fa fa-arrow-right">&nbsp;</span> 배송완료
+					<li><a class="" href="#"> <span class="fa fa-arrow-right">&nbsp;</span>
+							배송완료
 					</a></li>
-				</ul>
-			</li>
-			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+				</ul></li>
+			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em>
+					Logout</a></li>
 		</ul>
-	</div><!--/.sidebar-->
-	
+	</div>
+	<!--/.sidebar-->
+
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<ol class="breadcrumb">
-				<li><a href="#">
-					<em class="fa fa-home"></em>
+				<li><a href="#"> <em class="fa fa-home"></em>
 				</a></li>
 				<li class="active">DashBoard</li>
 			</ol>
-		</div><!--/.row-->
+		</div>
+		<!--/.row-->
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">DashBoard</h1>
 			</div>
-		</div><!--/.row-->
+		</div>
+		<!--/.row-->
 		<div class="panel panel-container">
 			<div class="row">
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-teal panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-shopping-cart color-blue"></em>
+						<div class="row no-padding">
+							<em class="fa fa-xl fa-shopping-cart color-blue"></em>
 							<div class="large">${todayOrders }</div>
 							<div class="text-muted">New Orders</div>
 						</div>
@@ -113,7 +132,8 @@
 				</div>
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-blue panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-truck color-orange"></em>
+						<div class="row no-padding">
+							<em class="fa fa-xl fa-truck color-orange"></em>
 							<div class="large">${delivery }</div>
 							<div class="text-muted">Delivering</div>
 						</div>
@@ -121,7 +141,8 @@
 				</div>
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-orange panel-widget border-right">
-						<div class="row no-padding"><em class="fa fa-xl fa-users color-teal"></em>
+						<div class="row no-padding">
+							<em class="fa fa-xl fa-users color-teal"></em>
 							<div class="large">${newUsers }</div>
 							<div class="text-muted">New Users</div>
 						</div>
@@ -129,39 +150,82 @@
 				</div>
 				<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
 					<div class="panel panel-red panel-widget ">
-						<div class="row no-padding"><em class="fa fa-xl fa-money color-red"></em>
-							<div class="large"><fmt:formatNumber
-																				value="${todayRevenue}"
-																				type="currency" currencySymbol="￦"/></div>
+						<div class="row no-padding">
+							<em class="fa fa-xl fa-money color-red"></em>
+							<div class="large">
+								<fmt:formatNumber value="${todayRevenue}" type="currency"
+									currencySymbol="￦" />
+							</div>
 							<div class="text-muted">Todays Revenue</div>
 						</div>
 					</div>
 				</div>
-			</div><!--/.row-->
+			</div>
+			<!--/.row-->
 		</div>
-		<div class="col-sm-12 ">
-			<div id="chartdiv"></div>		
+		<div class="row">
+			<div class="col-md-7 ">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						판매 현황
+						<span
+							class="pull-right clickable panel-toggle panel-button-tab-left"><em
+							class="fa fa-toggle-up"></em></span>
+					</div>
+					<div class="panel-body">
+						<div class="canvas-wrapper">
+							<div id="chartdiv"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						매출 현황
+						<span
+							class="pull-right clickable panel-toggle panel-button-tab-left"><em
+							class="fa fa-toggle-up"></em></span>
+					</div>
+					<div class="panel-body">
+						<div class="text-center" style="color:#2ed573;">
+							<span class="won" style="    font-size: 2em; vertical-align: top;  padding-right: 10px; line-height: 220%; ">￦</span>
+							<span style="font-size:4em">
+								<fmt:formatNumber value="${monthRevenue }"
+															   type="number" />
+							</span>
+						</div>
+						<c:forEach var="categoryCost" items="${categoryCostList }">
+							<p>${categoryCost["outer"] }</p>
+							<p>${categoryCost["acc"] }</p>
+							<p>${categoryCost["pants"] }</p>
+							<p>${categoryCost["top"] }</p>
+						</c:forEach>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
-
-				
-	<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script> -->
-	<!-- Resources -->
-<script src="https://www.amcharts.com/lib/4/core.js"></script>
-<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
-<script src="/js/jquery-1.11.1.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/chart.min.js"></script>
-<script src="/js/chart-data.js"></script>
-<script src="/js/easypiechart.js"></script>
-<script src="/js/easypiechart-data.js"></script>
-<script src="/js/bootstrap-datepicker.js"></script>
-<script src="/js/custom_dash.js"></script>
-	<!-- Chart code -->
-<script>
+		<!-- Resources -->
+		<script src="https://www.amcharts.com/lib/4/core.js"></script>
+		<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+		<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+		<script src="/js/jquery-1.11.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/chart.min.js"></script>
+		<script src="/js/chart-data.js"></script>
+		<script src="/js/easypiechart.js"></script>
+		<script src="/js/easypiechart-data.js"></script>
+		<script src="/js/bootstrap-datepicker.js"></script>
+		<script src="/js/custom_dash.js"></script>
+		<!-- Chart code -->
+		<script>
+var key = "PRODUCT_ID";
+
+
 // Themes begin
 am4core.useTheme(am4themes_animated);
 // Themes end
@@ -173,25 +237,13 @@ var chart = am4core.create("chartdiv", am4charts.XYChart);
 chart.scrollbarX = new am4core.Scrollbar();
 
 // Add data
-chart.data = [{
-  "model": "7온스 롱패딩",
-  "count": 10
-}, {
-  "model": "어쩌구 맨투맨",
-  "count": 2
-}, {
-	  "model": "어쩌구 맨투맨1",
-	  "count": 2
-	}, {
-		  "model": "어쩌구 맨투맨2",
-		  "count": 2
-		}, {
-			  "model": "어쩌구 맨투맨3",
-			  "count": 2
-			}, {
-				  "model": "어쩌구 맨투맨4",
-				  "count": 2
-				}
+chart.data = [
+	<c:forEach var="orderProduct" items="${orderProducts}">
+		{
+		  "model":"${orderProduct["PRODUCT_ID"]}",
+		  "count": ${orderProduct["SALE"]}
+		},
+	</c:forEach>
 ];
 
 // Create axes

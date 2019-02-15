@@ -12,7 +12,8 @@
 	
 	
 	<select id="selectList" parameterType="String" resultMap="selectOrderProduct">
-		select * from orders where buyer_id = #{value}
+		select * from orders 
+		<if test="_parameter != 'null'">where buyer_id = #{value}</if>
 	</select>
 	
 	<select id="getTodayOrders" resultMap="selectOrderProduct">
@@ -30,6 +31,14 @@
 		<result column="u_id" property="u_id"/>
 		<collection property="products" column="u_id" ofType="OrderProduct" select="product.selectOrderProduct"/>
 	</resultMap>
+	
+	<select id="selectOrderProductCount" resultType="Map">
+		select product_id, sum(count) sale from order_products group by product_id
+	</select>
+	
+	<select id="getMonthRevenue" resultType="int">
+		select sum(cost) from orders group by regdate having to_char(regdate,'mm') = to_char(sysdate,'mm')
+	</select>
 	
 	
 </mapper>

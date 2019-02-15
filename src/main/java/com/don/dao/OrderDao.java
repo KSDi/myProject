@@ -36,6 +36,16 @@ public class OrderDao {
 		return session.selectList("order.selectListByStat",stat);
 		
 	}
+
+	public List<Map<String, Integer>> selectOrderProductCount() {
+		return session.selectList("order.selectOrderProductCount");
+	}
+
+	public int getMonthRevenue() {
+		return session.selectOne("order.getMonthRevenue");
+	}
+
+
 	
 
 }

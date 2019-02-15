@@ -2,7 +2,8 @@ package com.don.domain;
 
 public class OrderProduct {
 	
-	String product_id, product_opt,count;
+	String product_id, product_opt;
+	int count;
 	Product product;
 	
 	
@@ -31,13 +32,14 @@ public class OrderProduct {
 		this.product_opt = product_opt;
 	}
 
-	public String getCount() {
+	public int getCount() {
 		return count;
 	}
 
-	public void setCount(String count) {
+	public void setCount(int count) {
 		this.count = count;
 	}
+
 	
 	
 
