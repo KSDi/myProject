@@ -44,7 +44,7 @@
 										<!-- single slide item -->
 										<li>
 											<div class="seq-model">
-												<img data-seq src="https://placeimg.com/970/353/people"
+												<img data-seq src="/image/main/main1.jpg"
 													alt="Men slide img" />
 											</div> <!-- <div class="seq-title">
 					               <span data-seq>Save Up to 75% Off</span>                
@@ -56,7 +56,7 @@
 										<!-- single slide item -->
 										<li>
 											<div class="seq-model">
-												<img data-seq src="https://placeimg.com/971/250/people"
+												<img data-seq src="/image/main/main2.jpg"
 													alt="Wristwatch slide img" />
 											</div>
 											
@@ -64,7 +64,7 @@
 										<!-- single slide item -->
 										<li>
 											<div class="seq-model">
-												<img data-seq src="https://placeimg.com/970/251/people"
+												<img data-seq src="/image/main/main3.jpg"
 													alt="Women Jeans slide img" />
 											</div>
 											
@@ -72,19 +72,19 @@
 										<!-- single slide item -->
 										<li>
 											<div class="seq-model">
-												<img data-seq src="https://placeimg.com/970/252/people"
+												<img data-seq src="/image/main/main4.jpg"
 													alt="Shoes slide img" />
 											</div>
 											
 										</li>
 										<!-- single slide item -->
-										<li>
+										<!-- <li>
 											<div class="seq-model">
 												<img data-seq src="https://placeimg.com/972/250/people"
 													alt="Male Female slide img" />
 											</div>
 											
-										</li>
+										</li> -->
 									</ul>
 								</div>
 								<!-- slider navigation btn -->
