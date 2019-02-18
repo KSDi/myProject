@@ -85,7 +85,7 @@ public class OrderService {
 	}
 
 	public Map<String, Integer> selectCategoryCostList() {
-		List<Order> orderList = orderDao.selectList(null);
+		List<Order> orderList = orderDao.selectList("admin");
 		int outer = 0;
 		int pants = 0;
 		int acc = 0;

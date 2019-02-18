@@ -13,7 +13,16 @@
 	
 	<select id="selectList" parameterType="String" resultMap="selectOrderProduct">
 		select * from orders 
-		<if test="_parameter != 'null'">where buyer_id = #{value}</if>
+		
+		<if test="_parameter != 'admin'">
+			<if test="_parameter == 'all'">
+				order by regdate desc
+			</if>
+			<if test="_parameter !='all'">
+				where buyer_id = #{value}
+			</if>
+		</if>
+		<if test="_parameter == 'admin'">where to_char(regdate,'mm') = to_char(sysdate,'mm')</if>
 	</select>
 	
 	<select id="getTodayOrders" resultMap="selectOrderProduct">

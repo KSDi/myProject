@@ -1014,8 +1014,7 @@ h1.page-header {
 
 .table > thead > tr > th {
   border-bottom: 1px solid #e6e7e8;
-  vertical-align: middle;
-  height: 50px; }
+  vertical-align: middle; }
 
 .fixed-table-pagination .pagination {
   margin-top: 10px;

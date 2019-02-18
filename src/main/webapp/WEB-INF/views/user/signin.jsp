@@ -79,11 +79,6 @@
 										<span>로그인</span>
 									</button>
 								</div>
-								<div class="col-xs-8 col-xs-offset-2">
-									<button type="button" class="btn btn-block nabtn">
-										<img class="naver" src="/image/naver_login.jpg" alt="" style =""/>
-									</button>
-								</div>
 							</form>
 						</div>
 					</div>
