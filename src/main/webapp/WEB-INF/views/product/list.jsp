@@ -45,7 +45,8 @@
 							<div class="product">
 								<div class="product-header">
 									<a href="/product/view?model=${product.model }">
-										<img class="product-img" src="/image/${product.category }/${product.image}" alt="" />
+										<img class="product-img" src="/image/${product.image}" alt="" style="width: 250px;
+    height: 300px;"/>
 									</a>
 								</div>
 								<div class="product-content text-center">

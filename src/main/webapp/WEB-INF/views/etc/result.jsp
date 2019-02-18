@@ -21,7 +21,7 @@
 		form.submit();
 	}
 </c:if>
-<c:if test="${!url eq '/user/signout'}">
+<c:if test="${url ne '/user/signout'}">
 alert("${msg}");
 location.href = "${url}";
 </c:if>

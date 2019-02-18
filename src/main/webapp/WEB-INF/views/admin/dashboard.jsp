@@ -122,14 +122,28 @@ white-space: nowrap;
 		<ul class="nav menu">
 			<li class="active"><a href="/admin/dashboard"><em class="fas fa-tachometer-alt">&nbsp;</em>
 					Dashboard</a></li>
-			<li><a href="/admin/categories"><em class="fas fa-chart-pie">&nbsp;</em>
-					Category&Product</a></li>
-			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-					<em class="fa fa-navicon">&nbsp;</em> Orders <span
+			<li class="parent">
+				<a data-toggle="collapse" href="#sub-item-1">
+					<em class="fas fa-chart-pie">&nbsp;</em> Category&Product
+					<span
 					data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em
 						class="fa fa-plus"></em></span>
-			</a>
+				</a>
 				<ul class="children collapse" id="sub-item-1">
+					<li><a class="" href="/admin/category"> <span class="fa fa-arrow-right">&nbsp;</span>
+							추가/삭제
+					</a></li>
+					<li><a class="" href="/admin/product"> <span class="fa fa-arrow-right">&nbsp;</span>
+							Product 관리
+					</a></li>
+				</ul>
+			</li>
+			<li class="parent "><a data-toggle="collapse" href="#sub-item-2">
+					<em class="fa fa-navicon">&nbsp;</em> Orders <span
+					data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em
+						class="fa fa-plus"></em></span>
+			</a>
+				<ul class="children collapse" id="sub-item-2">
 					<li><a class="" href="#"> <span class="fa fa-arrow-right">&nbsp;</span>
 							배송대기
 					</a></li>
@@ -251,8 +265,6 @@ white-space: nowrap;
 					</div>
 				</div>
 			</div>
-			 <div class="row">
-			 </div>
 			<div class="col-xs-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">

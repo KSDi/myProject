@@ -44,5 +44,51 @@
 		<result column="product_id" property="product_id"/>
 		<association property="product" javaType="Product" column="product_id" select="product.selectOneByModel"/>
 	</resultMap>
+	
+	<select id="categoryCount" resultType="int"
+			parameterType="String">
+		select count(*) from category where category = #{value}				
+	</select>
+	
+	<insert id="categoryInsert" parameterType="String">
+		insert into category values(#{value})
+	</insert>
+	
+	<select id="productCount" parameterType="String"
+		    resultType="int">
+		select count(*) from product where model = #{value}
+    </select>
+    
+    <delete id="deleteCategory" parameterType="String">
+    	delete from category where category = #{value}
+    </delete>
+    
+    <update id="updateCategory" parameterType="Map">
+    	update category set category = #{newCategory}
+    	where category = #{category}
+    </update>
+	<insert id="insert" parameterType="Product">
+    	insert into product values(
+    		#{model}, #{category},#{price}, 
+    		#{discount}, #{image}, #{content},
+    		#{count}, sysdate
+    	)
+    </insert>
+    
+    <select id="selectProductList" resultType="Product" parameterType="Map">
+    	select * from 
+			(select rownum rnum, a.* from
+				(select * from product 
+				<if test="category=='all'"></if>
+				<if test="category!='all'">where category =#{category} </if>
+				 order by regdate desc) a)
+		where rnum between #{start} and #{end}
+    </select>
+    
+    <select id="getTotalCount" parameterType="String" resultType="int">
+    	select count(*) from product
+    	<if test="_parameter=='all'"></if>
+    	<if test="_parameter!='all'">where category=#{value}</if>
+    </select>
 </mapper>
 

@@ -7,7 +7,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#"><span>DSHOP&nbsp;</span>Admin</a>
+			<a class="navbar-brand" href="/admin/dashboard"><span>DSHOP&nbsp;</span>Admin</a>
 			<ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown"><a class="dropdown-toggle count-info"
 					href="/"> <em class="fa fa-home"></em>

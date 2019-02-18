@@ -31,14 +31,14 @@ public class FileController {
 	@ResponseBody
 	public Map<String, String> fileUpload(
 			@RequestParam MultipartFile upload){
-		
-		String path = 
-				application.getRealPath("/WEB-INF/upload/qna");
+		String path =
+					application.getRealPath("/WEB-INF/upload");
+	
 		
 		String filename = 
 				fileService.saveFile(path, upload);
 		Map<String, String> map = new HashMap<>();
-		map.put("url", "/upload/qna/"+filename);
+		map.put("url", "/upload/"+filename);
 		
 		return map;
 	}
@@ -47,8 +47,7 @@ public class FileController {
 			method=RequestMethod.POST)
 	@ResponseBody
 	public String fileDelete(@RequestParam String src) {
-		String path = 
-				application.getRealPath("/WEB-INF/upload/qna");
+		String path = application.getRealPath("/WEB-INF/upload");
 		if( fileService.deleteFile(path , src)) {
 			return "success";
 		}else {

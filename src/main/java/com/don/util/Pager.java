@@ -3,9 +3,9 @@ package com.don.util;
 public class Pager {
 	
 	//한 페이지에 뿌려줄 게시물 리스트의 수
-	public static final int BOARDS = 5;
+	public static final int BOARDS = 8;
 	//한 페이지에 뿌려줄 페이지 버튼의 수
-	public static final int PAGES = 3;
+	public static final int PAGES = 5;
 	
 	public static String paging(int page, int total) {
 		int totalPage = 
@@ -22,7 +22,7 @@ public class Pager {
 			sb.append("</li>");
 		}else {
 			sb.append("<li>");
-			sb.append("<a href='?page="+(page-1)+"'>");
+			sb.append("<a href='?page="+(page-1)+"<c:if test=${param.category !=null}>&category=${param.category}</c:if>'>");
 			sb.append("<span class='glyphicon glyphicon-chevron-left'></span>");
 			sb.append("</a>");
 			sb.append("</li>");
@@ -55,7 +55,7 @@ public class Pager {
 			sb.append("</li>");
 		}else {
 			sb.append("<li>");
-			sb.append("<a href='?page="+(page+1)+"'>");
+			sb.append("<a href='?page="+(page+1)+"<c:if test=${param.category !=null}>&category=${param.category}</c:if>'>");
 			sb.append("<span class='glyphicon glyphicon-chevron-right'></span>");
 			sb.append("</a>");
 			sb.append("</li>");

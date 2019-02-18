@@ -15,7 +15,8 @@
 			<mvc:mapping path="/user/basket"/>
 			<mvc:mapping path="/user/mypage"/>
 			<mvc:mapping path="/admin/dashboard"/>
-			<mvc:mapping path="/admin/categories"/>
+			<mvc:mapping path="/admin/category"/>
+			<mvc:mapping path="/admin/product/**"/>
 			<ref bean="categoryListInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>
