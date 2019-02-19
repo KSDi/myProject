@@ -63,10 +63,9 @@ g[aria-labelledby="id-47-title"] {
 }
 
 .c_wrapper {
-	height: ${100/categoryCostMap.size()}%
+	height: ${100/categoryCostMap.size()}%;
 }
 
-%;
 }
 .c_wrapper>span {
 	height: 100%;
@@ -95,71 +94,31 @@ table.dataTable thead .sorting_desc_disabled:before {
 #dtVerticalScrollExample th, td {
 white-space: nowrap;
 }
+.table>tbody>tr>td{
+	padding :0;
+	vertical-align: middle;
+}
+ul{
+	margin-bottom:0 !important;
+}
+a, a:hover{
+    text-decoration: none;
+    color: #333333;
+}
+
+td>a{
+		text-decoration:none;
+		padding-left:15px;
+		line-height: 50px;
+	    width: 100%;
+	    display: block;
+	    
+	}
 </style>
 </head>
 <body>
 	<jsp:include page="admin_header.jsp"/>
-	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-		<div class="profile-sidebar">
-			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive"
-					alt="">
-			</div>
-			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Admin</div>
-				<div class="profile-usertitle-status">
-					<span class="indicator label-success"></span>Online
-				</div>
-			</div>
-			<div class="clear"></div>
-		</div>
-		<div class="divider"></div>
-		<form role="search">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
-			</div>
-		</form>
-		<ul class="nav menu">
-			<li class="active"><a href="/admin/dashboard"><em class="fas fa-tachometer-alt">&nbsp;</em>
-					Dashboard</a></li>
-			<li class="parent">
-				<a data-toggle="collapse" href="#sub-item-1">
-					<em class="fas fa-chart-pie">&nbsp;</em> Category&Product
-					<span
-					data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em
-						class="fa fa-plus"></em></span>
-				</a>
-				<ul class="children collapse" id="sub-item-1">
-					<li><a class="" href="/admin/category"> <span class="fa fa-arrow-right">&nbsp;</span>
-							추가/삭제
-					</a></li>
-					<li><a class="" href="/admin/product"> <span class="fa fa-arrow-right">&nbsp;</span>
-							Product 관리
-					</a></li>
-				</ul>
-			</li>
-			<li class="parent "><a data-toggle="collapse" href="#sub-item-2">
-					<em class="fa fa-navicon">&nbsp;</em> Orders <span
-					data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em
-						class="fa fa-plus"></em></span>
-			</a>
-				<ul class="children collapse" id="sub-item-2">
-					<li><a class="" href="#"> <span class="fa fa-arrow-right">&nbsp;</span>
-							배송대기
-					</a></li>
-					<li><a class="" href="#"> <span class="fa fa-arrow-right">&nbsp;</span>
-							배송중
-					</a></li>
-					<li><a class="" href="#"> <span class="fa fa-arrow-right">&nbsp;</span>
-							배송완료
-					</a></li>
-				</ul></li>
-			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em>
-					Logout</a></li>
-		</ul>
-	</div>
-	<!--/.sidebar-->
-
+	<jsp:include page="sidebar.jsp"/>
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<ol class="breadcrumb">
@@ -288,17 +247,19 @@ white-space: nowrap;
 										<c:forEach var="order" items="${orderList }">
 												<tr >
 													<td scope="row"></td>
-													<td>${order.regdate }</td>
-													<td>${order.buyer_id }</td>
+													<td><a href="/admin/order/view?order=${order.u_id }">${order.regdate }</a></td>
+													<td><a href="/admin/order/view?order=${order.u_id }">${order.buyer_id }</a></td>
 													<td>
-														<ul>
-												<c:forEach var="orderProduct" items="${order.products }">
-														<li>${orderProduct.product_id } | 옵션내용 : ${orderProduct.product_opt } | 가격 : <fmt:formatNumber value="${orderProduct.product.price * (1-orderProduct.product.discount) }" type="number" />원 / ${orderProduct.count }개</li>
-												</c:forEach>
-														</ul>
+														<a href="/admin/order/view?order=${order.u_id }">
+															<ul>
+													<c:forEach var="orderProduct" items="${order.products }">
+															<li>${orderProduct.product_id } | 옵션내용 : ${orderProduct.product_opt } | 가격 : <fmt:formatNumber value="${orderProduct.product.price * (1-orderProduct.product.discount) }" type="number" />원 / ${orderProduct.count }개</li>
+													</c:forEach>
+															</ul>
+														</a>
 													</td>
-													<td><fmt:formatNumber value="${order.cost }" type="number" />원</td>
-													<td class="stat">${order.status }</td>
+													<td><a href="/admin/order/view?order=${order.u_id }"><fmt:formatNumber value="${order.cost }" type="number" />원</a></td>
+													<td class="stat"><a href="/admin/order/view?order=${order.u_id }">${order.status }</a></td>
 												</tr>
 											</c:forEach>
 									</tbody>

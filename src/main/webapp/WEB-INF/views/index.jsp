@@ -120,6 +120,7 @@
 											<c:forEach var="category" items="${categoryList }">
 											<div class="tab-pane fade" id="${category }">
 												<ul class="aa-product-catg">
+													
 													<c:forEach var="product" items="${productList }">
 														<!-- start single product item -->
 														<c:if test="${product.category eq category }">
@@ -129,7 +130,7 @@
 																		src="/image/${product.image }"
 																		alt="polo shirt img" style="width: 250px;
     																	height: 300px;">	</a>
-																	<a class="aa-add-card-btn" href="#"><span
+																	<a class="aa-add-card-btn" href="javascript:basket('${product.model}');"><span
 																		class="fas fa-shopping-cart"></span>Add To Cart</a>
 																	<figcaption>
 																		<h4 class="aa-product-title">
@@ -187,6 +188,11 @@
 	<script>
 	 $("ul .cat-sel:nth-child(1)").addClass("active");
 	 $(".tab-pane:nth-child(1)").addClass("in active");
+	 
+	 function basket(m){
+				alert('필수 옵션을 선택해 주세요');
+				location.href="product/view?model="+ m
+		}
 	</script>
 </body>
 </html>

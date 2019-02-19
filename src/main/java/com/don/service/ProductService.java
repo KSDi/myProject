@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.don.dao.BoardDao;
 import com.don.dao.ProductDao;
 import com.don.domain.Product;
 import com.don.util.Pager;
@@ -17,6 +18,10 @@ public class ProductService {
 	@Autowired
 	private ProductDao productDao;
 
+	@Autowired
+	private BoardDao boardDao;
+	
+	
 	public Product selectOneByModel(String model) {
 		return productDao.selectOneByModel(model);
 	}
@@ -41,10 +46,19 @@ public class ProductService {
 		
 		return boardList;
 	}
-
+	
 	public Object getPaging(int page,String category) {
 		int total = productDao.getTotalCount(category);
 		return Pager.paging(page, total);
+	}
+
+
+	public void update(Product product,String old_model) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("product", product);
+		map.put("old_model", old_model);
+		productDao.updateProduct(map);
+		
 	}
 	
 	

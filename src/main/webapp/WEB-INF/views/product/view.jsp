@@ -42,7 +42,7 @@
 				<div class="col-sm-8 text-center">
 					<div class="row" >
 						<div class="col-sm-6">
-							<img style="width:100%;"src="/image/${product.category }/${product.image}" alt="" />
+							<img style="width:100%;"src="/image/${product.image}" alt="" />
 						</div>
 						<div class="col-sm-6 text-left">
 							<p class="modelname">${product.model }</p>
@@ -68,21 +68,36 @@
 							</c:if>
 							<hr />
 							<p>옵션선택</p>
-							<select name="option" id="option">
-								<option value="">- 필수 : 옵션을 선택해주세요 -</option>
-								<optgroup label="Size">
-									<option value="XL">XL</option>
-									<option value="L">L</option>
-									<option value="M">M</option>
-								</optgroup>
-							</select>
+							<c:if test="${product.category ne 'shoes' }">
+								<select name="option" id="option">
+									<option value="">- 필수 : 옵션을 선택해주세요 -</option>
+									<optgroup label="Size">
+										<option value="XL">XL</option>
+										<option value="L">L</option>
+										<option value="M">M</option>
+									</optgroup>
+								</select>
+							</c:if>		
+							<c:if test="${product.category eq 'shoes' }">
+								<select name="option" id="option">
+									<option value="">- 필수 : 옵션을 선택해주세요 -</option>
+									<optgroup label="Size">
+										<option value="270">270</option>
+										<option value="265">265</option>
+										<option value="260">260</option>
+									</optgroup>
+									
+								</select>
+							</c:if>		
 							<hr />
 							<button class="btn btn-block btn-dark pad " onclick="purchase('${product.model}')" id="purbtn">지금구매</button>
 							<button class="btn btn-block btn-default pad" onclick="basket('${product.model}')" id="basketbtn">장바구니에 담기</button>
 						</div>
 					</div>
 					<div class="row" style="margin-top:30px;">
-						<img style="width:100%;"src="/image/upload/gd.jpg" alt="" />
+					<p style="width:100%">
+						${product.content }					
+					</p>
 					</div>
 				</div>
 				<div class="col-sm-2"></div>

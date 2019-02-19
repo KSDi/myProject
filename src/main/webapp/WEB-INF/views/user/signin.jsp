@@ -79,6 +79,11 @@
 										<span>로그인</span>
 									</button>
 								</div>
+								<div class="col-xs-8 col-xs-offset-2">
+									<button type="button" class="btn btn-block btn-success" onclick="signup();">
+										<span>회원가입</span>
+									</button>
+								</div>
 							</form>
 						</div>
 					</div>
@@ -90,5 +95,10 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script>
+		function signup(){
+			location.href='/user/signup';
+		}
+	</script>
 </body>
 </html>

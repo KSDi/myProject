@@ -82,7 +82,8 @@
 				<if test="category=='all'"></if>
 				<if test="category!='all'">where category =#{category} </if>
 				 order by regdate desc) a)
-		where rnum between #{start} and #{end}
+			where rnum between #{start} and #{end}
+			order by regdate desc
     </select>
     
     <select id="getTotalCount" parameterType="String" resultType="int">
@@ -90,5 +91,26 @@
     	<if test="_parameter=='all'"></if>
     	<if test="_parameter!='all'">where category=#{value}</if>
     </select>
+    
+    <update id="updateProduct" parameterType="Map">
+    	update product set 
+    	model = #{product.model},
+    	category = #{product.category},
+    	discount = #{product.discount},
+    	price = #{product.price},
+    	<if test="product.image != null">
+    	image = #{product.image},
+    	</if>
+    	
+    	<if test="product.content != null">
+   		content = #{product.content},
+    	</if>
+    	count =#{product.count}
+    	where model =#{old_model}
+    </update>
+    
+    <update id="updateCount" parameterType="Map">
+    	update product set count = count - #{count} where model =#{product_id}
+    </update>
 </mapper>
 

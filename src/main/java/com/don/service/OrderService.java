@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.don.dao.OrderDao;
+import com.don.dao.ProductDao;
 import com.don.domain.Order;
 import com.don.domain.OrderProduct;
 
@@ -16,6 +17,9 @@ public class OrderService {
 	
 	@Autowired
 	private OrderDao orderDao;
+	
+	@Autowired
+	private ProductDao productDao;
 
 	public void insertOrder(Order order) {
 		
@@ -31,6 +35,7 @@ public class OrderService {
 		map.put("count", count);
 		
 		orderDao.insertOrderProduct(map);
+		productDao.minusCount(map);
 	}
 
 	public Map<String,Integer> getStatus(List<Order> orderList) {
@@ -86,33 +91,37 @@ public class OrderService {
 
 	public Map<String, Integer> selectCategoryCostList() {
 		List<Order> orderList = orderDao.selectList("admin");
-		int outer = 0;
-		int pants = 0;
-		int acc = 0;
-		int top = 0;
+		List<String> categoryList = productDao.selectCategoryList();
+		Map<String,Integer> map = new HashMap<>();
+		for(String category : categoryList) {
+			map.put(""+category,0);
+		}
 	
 		for(Order order : orderList) {
 			for(OrderProduct orderProduct : order.getProducts()) {
 				String productCategory = orderProduct.getProduct().getCategory();
-				if(productCategory.equals("outer")){
-					outer += orderProduct.getCount() * orderProduct.getProduct().getPrice() * (1- orderProduct.getProduct().getDiscount());
-				}else if(productCategory.equals("acc")) {
-					acc += orderProduct.getCount() * orderProduct.getProduct().getPrice() * (1- orderProduct.getProduct().getDiscount());
-				}else if(productCategory.equals("pants")) {
-					pants += orderProduct.getCount() * orderProduct.getProduct().getPrice() * (1- orderProduct.getProduct().getDiscount());
-				}else if(productCategory.equals("top")) {
-					top += orderProduct.getCount() * orderProduct.getProduct().getPrice() * (1- orderProduct.getProduct().getDiscount());
-				}
+				int a = 0;
+				a += map.get(productCategory)+(orderProduct.getProduct().getPrice()*(1-orderProduct.getProduct().getDiscount()));
+				map.put(""+productCategory, a);
 			}
 		}
-		
-		Map<String, Integer> map = new HashMap<>();
-		map.put("outer", outer);
-		map.put("acc", acc);
-		map.put("pants", pants);
-		map.put("top", top);
+		System.out.println(map.keySet());
+		System.out.println(map.values());
 		
 		return map;
+	}
+
+	public Order selectOrderByUid(String u_id) {
+		return orderDao.selectOrderByUid(u_id);
+	}
+
+	public void updateStatus(String u_id, String change) {
+		Map<String,String> map = new HashMap<>();
+		map.put("u_id", u_id);
+		map.put("change", change);
+		
+		orderDao.updateStatus(map);
+		
 	}
 
 	

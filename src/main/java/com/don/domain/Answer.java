@@ -1,14 +1,13 @@
 package com.don.domain;
 
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class Question {
+public class Answer {
 	
-	private int id;
-	private String users_id,regdate,status;
+	private int id,qna_id;
+	
+	private String regdate;
 	
 	@Pattern(regexp="[\\s0-9A-Za-z가-힣ㄱ-ㅎㅏ-ㅣ!@#*_-]{1,50}",
 			 message="숫자,알파벳,한글,!@#*-_에 1 ~ 50이하의 문자")
@@ -17,25 +16,11 @@ public class Question {
 	@NotNull(message="내용을 입력해 주세요")
 	private String content;
 	
-	private List<Answer> answers;
-	
-	public List<Answer> getAnswers() {
-		return answers;
-	}
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
-	}
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public String getUsers_id() {
-		return users_id;
-	}
-	public void setUsers_id(String users_id) {
-		this.users_id = users_id;
 	}
 	public String getTitle() {
 		return title;
@@ -55,12 +40,18 @@ public class Question {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	public String getStatus() {
-		return status;
+	public int getQna_id() {
+		return qna_id;
 	}
-	public void setStatus(String status) {
-		this.status = status;
-	} 
+	public void setQna_id(int qna_id) {
+		this.qna_id = qna_id;
+	}
+	@Override
+	public String toString() {
+		return "Answer [id=" + id + ", qna_id=" + qna_id + ", regdate=" + regdate + ", title=" + title + ", content="
+				+ content + "]";
+	}
+	
 
 	
 }

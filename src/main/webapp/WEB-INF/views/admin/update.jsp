@@ -43,66 +43,7 @@
 </head>
 <body>
 	<jsp:include page="admin_header.jsp" />
-	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
-		<div class="profile-sidebar">
-			<div class="profile-userpic">
-				<img src="http://placehold.it/50/30a5ff/fff" class="img-responsive"
-					alt="">
-			</div>
-			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">${user.id }</div>
-				<div class="profile-usertitle-status">
-					<span class="indicator label-success"></span>Online
-				</div>
-			</div>
-			<div class="clear"></div>
-		</div>
-		<div class="divider"></div>
-		<form role="search">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search">
-			</div>
-		</form>
-		<ul class="nav menu">
-			<li><a href="/admin/dashboard"><em
-					class="fas fa-tachometer-alt">&nbsp;</em> Dashboard</a></li>
-			<li class="parent">
-				<a data-toggle="collapse" href="#sub-item-1">
-					<em class="fas fa-chart-pie">&nbsp;</em> Category&Product
-					<span
-					data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em
-						class="fa fa-plus"></em></span>
-				</a>
-				<ul class="children collapse" id="sub-item-1">
-					<li><a class="" href="/admin/category"> <span class="fa fa-arrow-right">&nbsp;</span>
-							추가/삭제
-					</a></li>
-					<li><a class="" href="/admin/product"> <span class="fa fa-arrow-right">&nbsp;</span>
-							Product 관리
-					</a></li>
-				</ul>
-			</li>
-			<li class="parent "><a data-toggle="collapse" href="#sub-item-2">
-					<em class="fa fa-navicon">&nbsp;</em> Orders <span
-					data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em
-						class="fa fa-plus"></em></span>
-			</a>
-				<ul class="children collapse" id="sub-item-2">
-					<li><a class="" href="#"> <span class="fa fa-arrow-right">&nbsp;</span>
-							배송대기
-					</a></li>
-					<li><a class="" href="#"> <span class="fa fa-arrow-right">&nbsp;</span>
-							배송중
-					</a></li>
-					<li><a class="" href="#"> <span class="fa fa-arrow-right">&nbsp;</span>
-							배송완료
-					</a></li>
-				</ul></li>
-			<li><a href="login.html"><em class="fa fa-power-off">&nbsp;</em>
-					Logout</a></li>
-		</ul>
-	</div>
-	<!--/.sidebar-->
+	<jsp:include page="sidebar.jsp"/>
 
 	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
@@ -120,13 +61,11 @@
 			</div>
 		</div>
 		<div class="row">
-				<div class="col-sm-5">
+				<div class="col-md-5 col-sm-12 col-xs-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							선택된 아이템
 						</div>
-						
-						
 						<div class="panel-body text-center">
 							<div class="item-header">
 								<img src="/image/${product.image }" style="width:100%" alt="" />
@@ -137,17 +76,18 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-7">
-					<form action="/admin/stock/update" method="post" enctype="multipart/form-data">
+				<div class="col-md-7 col-sm-12 col-xs-12">
+					<form action="/admin/product/update?${_csrf.parameterName }=${_csrf.token }" method="post" enctype="multipart/form-data">
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								세부사항
 							</div>
 							<div class="panel-body">
 								<div class="form-group row">
-								<label for="model" class="col-sm-2 col-form-label text-center" >모델명</label>
+								<label for="" class="col-sm-2 col-form-label text-center" >모델명</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" name="model" value="${product.model }" readonly/>
+									<input type="hidden" class="form-control"  name="old_model" value="${product.model }" />
+									<input type="text" class="form-control"  name="model" value="${product.model }" />
 								</div>
 								</div>
 								<div class="form-group row">
@@ -166,7 +106,7 @@
 									</div>
 								</div>
 								<div class="form-group row">
-									<label for="manufacturer" class="col-sm-2 col-form-label text-center">이미지변경</label>
+									<label for="" class="col-sm-2 col-form-label text-center">이미지변경</label>
 									<div class="col-sm-10">
 										<label class="btn btn-default form-btn" for="image">
 											<input type="file" name="image" id="image" 
@@ -178,12 +118,22 @@
 									</div>
 								</div>
 								<div class="form-group row">
-								<label for="" class="col-xs-2 col-form-label text-center">내용</label>
-								
-								
-								<div class="col-xs-10">
-									<textarea class="form-control" id="content" name="content" /></textarea>
+									<label for="" class="col-xs-2 col-form-label text-center">내용</label>
+									<div class="col-xs-10">
+										<textarea class="form-control" id="content" name="content" /></textarea>
+									</div>
 								</div>
+								<div class="form-group row">
+									<label for="price" class="col-sm-2 col-form-label text-center">가격</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="price" value="${product.price }"/>
+									</div>
+								</div>
+								<div class="form-group row">
+									<label for="discount" class="col-sm-2 col-form-label text-center">할인율</label>
+									<div class="col-sm-10">
+										<input type="text" class="form-control" name="discount" value="${product.discount }"/>
+									</div>
 								</div>
 								<div class="form-group row">
 									<label for="count" class="col-sm-2 col-form-label text-center">재고</label>
@@ -198,6 +148,10 @@
 						</div>
 					</form>
 				</div>
+				
+				
+				
+				
 			</div>
 		
 	</div>
@@ -263,6 +217,7 @@
 				}
 			});
 		}
+	
 	</script>
 		
 </body>

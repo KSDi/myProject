@@ -60,4 +60,14 @@ public class ProductDao {
 	public int getTotalCount(String category) {
 		return session.selectOne("product.getTotalCount",category);
 	}
+
+	public void updateProduct(Map<String,Object> map) {
+		session.update("product.updateProduct",map);
+		
+	}
+
+	public void minusCount(Map<String, Object> map) {
+		session.update("product.updateCount",map);
+		
+	}
 }

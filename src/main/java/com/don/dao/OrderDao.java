@@ -45,6 +45,15 @@ public class OrderDao {
 		return session.selectOne("order.getMonthRevenue");
 	}
 
+	public Order selectOrderByUid(String u_id) {
+		return session.selectOne("order.selectOrderByUid",u_id);
+	}
+
+	public void updateStatus(Map<String, String> map) {
+		session.update("order.updateStatus",map);
+		
+	}
+
 
 	
 

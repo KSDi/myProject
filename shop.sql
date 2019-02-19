@@ -58,7 +58,7 @@ values('coat-d', 'outer', 'polo', 300000, 0.2, 'coat-d.jpg',
        '가을타는 당신을 위한 트랜치코트', 5, sysdate);
 
 --Product table 제약조건 수정
-select * from USER_CONSTRAINTS where table_name ='CART';
+select * from USER_CONSTRAINTS where table_name ='CATEGORY';
 select * from USER_CONSTRAINTS where table_name ='PRODUCT';
 alter table CATEGORY drop constraint SYS_C007139;
 

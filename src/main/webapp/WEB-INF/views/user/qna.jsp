@@ -123,12 +123,12 @@
 								</thead>
 								<tbody>
 								<c:forEach var="question" items="${questionList}" varStatus="i">
-									<tr style="cursor:pointer;">
+									<tr style="cursor:pointer; ">
 										<td>
 											<a href="#question_${i.index +1 }" role="button" 
 													data-toggle="collapse" aria-expanded="false" 
 														aria-controls="collapseExample">
-												${i.index + 1 }
+												${i.index+1 }
 											</a>
 										</td>
 										<td>
@@ -163,6 +163,49 @@
 											</div>
 										</td>
 									</tr>
+									<c:forEach var="answer" items="${question.answers }">
+										<tr style="cursor:pointer;background-color: #efefef">
+										<td>
+											<a href="#answer_${i.index +1 }" role="button" 
+													data-toggle="collapse" aria-expanded="false" 
+														aria-controls="collapseExample">
+												<i class="fas fa-reply" 
+						  						 style="transform:rotate(180deg)"></i>
+											</a>
+										</td>
+										<td>
+											<a href="#answer_${i.index +1 }" role="button" 
+													data-toggle="collapse" aria-expanded="false" 
+														aria-controls="collapseExample">
+												${answer.title }
+											</a>
+										</td>
+										<td>
+											<a href="#answer_${i.index +1 }" role="button" 
+													data-toggle="collapse" aria-expanded="false" 
+														aria-controls="collapseExample">
+												<fmt:parseDate value="${answer.regdate }" var="regdate" pattern="yyyy-mm-dd"/>
+												<fmt:formatDate value="${regdate }" pattern="yy-mm-dd"/>
+											</a>
+										</td>
+										<td>
+											<a href="#answer_${i.index +1 }" role="button" 
+													data-toggle="collapse" aria-expanded="false" 
+														aria-controls="collapseExample">
+																							
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<div class="collapse" id="answer_${i.index +1 }">
+												<div class="well">
+													${answer.content }
+												</div>
+											</div>
+										</td>
+									</tr>
+									</c:forEach>
 								</c:forEach>
 								</tbody>
 								<tfoot>

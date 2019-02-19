@@ -13,6 +13,7 @@
 		<!-- use-expressions : spel 사용 여부 -->
 		<security:intercept-url pattern="/" access="permitAll"/>
 		<security:intercept-url pattern="/user/signin" access="permitAll"/>
+		<security:intercept-url pattern="/user/signup" access="permitAll"/>
 		<security:intercept-url pattern="/user/dupCheck" access="permitAll"/>
 		<security:intercept-url pattern="/user/**" access="isAuthenticated()"/>
 		<security:intercept-url pattern="/cart/insert" access="isAuthenticated()"/>

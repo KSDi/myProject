@@ -3,12 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="qna">
-	<select id="selectList" parameterType="String" resultType="Question">
-		select * from question where users_id = #{value}
+	<select id="selectList" parameterType="String" resultMap="selectAnswerList">
+		select * from question <if test="_parameter !='admin'">where users_id = #{value}</if> order by regdate desc
 	</select>
 	<insert id="insertQna" parameterType="Question">
 		insert into question values(seq_qna_id.nextval, #{users_id}, #{title}, #{content},sysdate,#{status})
 	</insert>
+	<select id="getQnaTotalCount" resultType="int">
+		select count(*) from question
+	</select>
+	
+	<select id="selectQuestionListP" parameterType="Map" resultMap="selectAnswerList">
+			select * from 
+			(select rownum rnum, a.* from
+				(select * from question 
+				 order by regdate desc) a)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<resultMap type="Question" id="selectAnswerList">
+		<result column="id" property="id"/>
+		<collection property="answers" column="id" ofType="Answer" select="qna.selectAnswer"/>
+	</resultMap>
+	
+	<select id="selectQuestion" parameterType="int" resultMap="selectAnswerList">
+		select * from question where id = #{value}
+	</select>
+	
+	<insert id="insertAnswer" parameterType="Answer">
+		insert into answer values(seq_answer_id.nextval,#{qna_id},#{title},#{content},sysdate)
+	</insert>
+	
+	<update id="updateStatus" parameterType="int">
+		update question set status='답변완료' where id = #{value}
+	</update>
+	
+	<select id="selectAnswer" parameterType="int" resultType="Answer">
+		select * from answer where qna_id = #{value}
+	</select>
 </mapper>
 
 
